@@ -41,6 +41,19 @@ export function getCalendarData(date: Date): Array<Array<number>> {
   return result;
 }
 
+export function getCurrentWeek(calendarData: Array<Array<number>>) {
+  const today = new Date();
+  const day = today.getDate();
+
+  for (let i = 0; i < calendarData.length; i++) {
+    const curData = calendarData[i];
+    if (curData.find(it => it == day)) {
+      return curData;
+    }
+  }
+
+}
+
 export function isEqualDay(date1: Date, date2: Date) {
   const isYearEqual = date1.getFullYear() === date2.getFullYear();
   const isMonthEqual = date1.getMonth() === date2.getMonth();

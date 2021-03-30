@@ -2,3 +2,72 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.calendar-head-item {
+  flex: 1;
+  text-align: center;
+  vertical-align: middle;
+  height: 60px;
+  color: #e0e0e0;
+}
+
+
+.calendar-row {
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.calendar-item {
+  flex: 1;
+  text-align: center;
+  vertical-align: middle;
+  //height: 90px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 14.28vw;
+
+
+  //margin: auto;
+  .calendar-item-button {
+    //margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 13.08vw;
+    padding: 3px;
+    border: none;
+    transition: all 0.2s ease-out;
+    background: none;
+    cursor: pointer;
+    border-radius: 100%;
+
+    &.today {
+      border: 2px solid #00a0ad;
+    }
+
+
+    .calendar-item-mark {
+      margin: auto;
+      font-size: 22px;
+      color: #F00;
+    }
+  }
+
+}
+
+
+.calendar-expand-toggle {
+  text-align: center;
+  cursor: pointer;
+  transform: rotate(180deg);
+
+  .coll {
+    transform: rotate(180deg);
+  }
+
+
+}
+
+
+

@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "tjut-reservation",
   "description": "天津理工大学计算机学院会议室预约小程序",
-  "appid": "touristappid",
+  "appid": "wxe48a3d699f7d6cfa",
   "setting": {
     "urlCheck": true,
     "es6": false,
