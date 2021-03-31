@@ -1,0 +1,45 @@
+@bar-color: #f2f3f5;
+@bar-selected-color: #a6a9ae;
+@text-color: #d1d1d1;
+
+.line-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  .line-item-container {
+    display: flex;
+    flex-direction: column;
+
+    .line-item-text {
+      font-size: 28px;
+      color: @text-color;
+      margin-left: -10px;
+    }
+
+    .line-item-bar {;
+      height: 28px;
+      //width: 30px;
+      width: 32px;
+      padding-right: 10px;
+      background: @bar-color;
+      align-self: flex-end;
+
+      &.selected {
+        background: @bar-selected-color;
+      }
+    }
+  }
+}
+
+.line-foot {
+  display: flex;
+  justify-content: space-between;
+  .line-foot-item {
+    color: @text-color;
+    font-size: 32px;
+    margin-left: -18px;
+
+  }
+
+}
+

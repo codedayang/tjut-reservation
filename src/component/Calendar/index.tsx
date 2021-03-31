@@ -1,5 +1,5 @@
 import HandleBar from "./HandleBar";
-import {useState} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import Taro from "@tarojs/taro"
 import {View, Text} from "@tarojs/components";
 import './index.less'
@@ -11,7 +11,13 @@ type Prop = {
 
 };
 
-const getWeekItem = (ymDate: Date, today: Date, weekList: Array<number>, onChange: (date: Date) => void) => {
+const getWeekItem = (
+  ymDate: Date,
+  today: Date,
+  weekList: Array<number>,
+  onChange: (date: Date) => void,
+  setCurDate: Dispatch<SetStateAction<Date>>
+) => {
   return weekList.map((day, j) => {
 
     let cn = `calendar-item-button`;
@@ -20,6 +26,7 @@ const getWeekItem = (ymDate: Date, today: Date, weekList: Array<number>, onChang
     }
     return day !== -1 ? (
       <View key={j} className={`calendar-item`} onClick={() => {
+        setCurDate(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
         onChange(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
       }}>
         <View className={cn}>
@@ -36,6 +43,8 @@ const getWeekItem = (ymDate: Date, today: Date, weekList: Array<number>, onChang
 
 const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
   const [ymDate, setYmDate] = useState(date);
+
+  const [curDate, setCurDate] = useState(new Date());
 
   const calendarData = getCalendarData(ymDate);
 
@@ -69,18 +78,27 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
 
           {expanded ? (
             <View className="calendar-row">
-              {getWeekItem(ymDate, date, getCurrentWeek(calendarData)!, onChange)}
+              {getWeekItem(
+                ymDate,
+                curDate,
+                getCurrentWeek(curDate, calendarData)!,
+                onChange,
+                setCurDate)}
             </View>
           ) : calendarData.map((weekList, i) => (
             <View key={i} className="calendar-row">
-              {getWeekItem(ymDate, date, weekList, onChange)}
+              {getWeekItem(
+                ymDate,
+                curDate,
+                weekList,
+                onChange,
+                setCurDate)}
             </View>
           ))}
 
           <View
             className="calendar-expand-toggle"
             onClick={() => {
-              setYmDate(new Date())
               setExpanded(!expanded)
               onChange(new Date());
             }}

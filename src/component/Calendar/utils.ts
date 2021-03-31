@@ -41,8 +41,7 @@ export function getCalendarData(date: Date): Array<Array<number>> {
   return result;
 }
 
-export function getCurrentWeek(calendarData: Array<Array<number>>) {
-  const today = new Date();
+export function getCurrentWeek(today: Date, calendarData: Array<Array<number>>) {
   const day = today.getDate();
 
   for (let i = 0; i < calendarData.length; i++) {
