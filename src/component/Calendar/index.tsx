@@ -51,7 +51,7 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <View>
+    <View className="calendar-container">
       <HandleBar
         ymDate={ymDate}
         onChange={(date) => {
