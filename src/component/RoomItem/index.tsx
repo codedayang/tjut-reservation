@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 import TimeLine, {BarItem} from "../TimeLine";
-import {Text, View} from "@tarojs/components";
+import {View} from "@tarojs/components";
 import './index.less'
 
 type Prop = {

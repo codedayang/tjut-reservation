@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import {StandardProps, Text, View} from "@tarojs/components";
+import {Text, View} from "@tarojs/components";
 import "./index.less";
 import {lineItem} from "./util";
 
