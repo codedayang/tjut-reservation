@@ -1,0 +1,48 @@
+.month-bar {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+
+  .month {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 88px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 14px;
+    cursor: pointer;
+
+    .month-title {
+      width: 60px;
+      height: 60px;
+      font-size: 32px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+    .month-count {
+      font-size: 28px;
+    }
+
+
+    &.disabled {
+      .month-title {
+        color: rgba(0, 0, 0, 0.4);
+      }
+      .month-count {
+        color: rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    &.selected {
+      .month-title {
+        border-radius: 100%;
+        background: rgba(0, 163, 255, 0.6);
+      }
+    }
+  }
+}

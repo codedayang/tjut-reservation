@@ -7,6 +7,7 @@ import TimeLine from "../../component/TimeLine";
 import RoomItem from "../../component/RoomItem";
 import MeetItem from "../../component/MeetItem";
 import TimeLineCanvas from "../../component/TimeLineCanvas";
+import MonthBar from "../../component/MonthBar";
 
 const Index: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
@@ -17,12 +18,12 @@ const Index: Taro.FunctionComponent = () => {
       {/*  setDate(date);*/}
       {/*}}/>*/}
 
-      <TimeLineCanvas
-        startHour={8}
-        endHour={23}
-        barList={[
-          {from: 15, to: 16}
-        ]}/>
+      {/*<TimeLineCanvas*/}
+      {/*  startHour={8}*/}
+      {/*  endHour={23}*/}
+      {/*  barList={[*/}
+      {/*    {from: 15, to: 16}*/}
+      {/*  ]}/>*/}
       {/*<RoomItem*/}
       {/*  name={"108"}*/}
       {/*  desc={"108会议室"}*/}
@@ -31,6 +32,7 @@ const Index: Taro.FunctionComponent = () => {
 
       {/*<MeetItem title="测试会议" who="123" timeStr="2021年3月24日"/>*/}
 
+      <MonthBar months={[0,1,2,1,0,0,0,0,0,0,0,0]}/>
     </View>
 
 

@@ -1,7 +1,8 @@
 import Taro from "@tarojs/taro";
-import TimeLine, {BarItem} from "../TimeLine";
 import {View} from "@tarojs/components";
 import './index.less'
+import {BarItem} from "../TimeLine";
+import TimeLineCanvas from "../TimeLineCanvas";
 
 type Prop = {
   name: string;
@@ -23,7 +24,7 @@ const RoomItem: Taro.FunctionComponent<Prop> = ({name, desc, imgUrl, timeBar}) =
         </View>
       </View>
 
-      <TimeLine
+      <TimeLineCanvas
         startHour={8}
         endHour={23}
         barList={timeBar} />
