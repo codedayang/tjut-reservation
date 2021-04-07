@@ -14,9 +14,9 @@ const Index: Taro.FunctionComponent = () => {
 
   return (
     <View className='index' style={{background: "#f0f0f0"}}>
-      {/*<Calendar date={date} onChange={(date: Date) => {*/}
-      {/*  setDate(date);*/}
-      {/*}}/>*/}
+      <Calendar date={date} onChange={(date: Date) => {
+        setDate(date);
+      }}/>
 
       {/*<TimeLineCanvas*/}
       {/*  startHour={8}*/}
@@ -30,9 +30,13 @@ const Index: Taro.FunctionComponent = () => {
       {/*  imgUrl={""}*/}
       {/*  timeBar={[{from: 8, to: 18}]}/>*/}
 
-      {/*<MeetItem title="测试会议" who="123" timeStr="2021年3月24日"/>*/}
+      <MeetItem title="测试会议" who="123" timeStr="2021年3月24日"/>
 
-      <MonthBar months={[0,1,2,1,0,0,0,0,0,0,0,0]}/>
+      <MonthBar
+        months={[0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0]}
+        curDate={new Date()}
+        onSwitchMonth={(toYear, toMonth) => console.log(toYear, toMonth)}
+      />
     </View>
 
 

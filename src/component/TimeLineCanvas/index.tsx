@@ -30,7 +30,7 @@ const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
 
       const canvasWidth = res[0].width;
       console.log(canvasWidth);
-      const endTextWidth = ctx.measureText(endHour.toString()).width;
+      // const endTextWidth = ctx.measureText(endHour.toString()).width;
 
       const textBlockCount = endHour - startHour + 1;
       const perTextBlockWidth = (canvasWidth ) / textBlockCount;

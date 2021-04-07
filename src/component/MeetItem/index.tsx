@@ -1,6 +1,7 @@
 import Taro from "@tarojs/taro";
-import {View} from "@tarojs/components";
+import {Text, View} from "@tarojs/components";
 import './index.less'
+import IconFont from "../iconfont";
 
 type Prop = {
   title: string;
@@ -10,17 +11,36 @@ type Prop = {
 const MeetItem: Taro.FunctionComponent<Prop> = ({title, who, timeStr}) => {
   return (
     <View className="container">
-      <View className="title">
-        {title}
+
+      <View className="double-arrow">
+        <IconFont name={"double-left-arrow"}/>
+      </View>
+      <View className="title-line">
+        <View className="title">
+          Name
+        </View>
+        <View className="status">
+          未开始
+        </View>
       </View>
 
-      <View className="who">
-        {who}
+      <View className="first-line">
+        <View className="creator">
+          <IconFont name={"creator"}/>
+          <Text>创建者</Text>
+        </View>
+        <View className="meeting-name">
+          <IconFont name={"meetingName"}/>
+          <Text>会议室名称</Text>
+        </View>
       </View>
 
-      <View className="timeStr">
-        {timeStr}
+      <View className="second-line">
+        <IconFont name={"date"}/>
+        <Text className={"date-easyread"}>明天</Text>
+        <Text className={"time"}>15:00~16:00</Text>
       </View>
+
 
     </View>
   );

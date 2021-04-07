@@ -4,6 +4,7 @@ import Taro from "@tarojs/taro"
 import {View, Text} from "@tarojs/components";
 import './index.less'
 import {getCalendarData, getCurrentWeek} from "./utils";
+import IconFont from "../iconfont";
 
 type Prop = {
   date: Date;
@@ -97,18 +98,13 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
           ))}
 
           <View
-            className="calendar-expand-toggle"
+            className={`calendar-expand-toggle ${expanded ? "coll" : ""}`}
             onClick={() => {
               setExpanded(!expanded)
               onChange(new Date());
             }}
           >
-            <View
-              className={`iconfont iconexpand ${expanded ? "coll" : ""}`}
-              style={{
-                fontSize: "24px",
-                color: "#5ea3ef"
-              }}/>
+            <IconFont name="expand" size={48} color="#5ea3ef"/>
           </View>
         </View>
       </View>

@@ -1,48 +1,87 @@
-.month-bar {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
+.container {
 
-  .month {
+
+  .year-bar {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 88px;
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 14px;
-    cursor: pointer;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-inline-end: 32px;
 
-    .month-title {
-      width: 60px;
-      height: 60px;
-      font-size: 32px;
-      padding: 8px;
+    .left-arrow {
+      cursor: pointer;
+
+    }
+
+    .year-text {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      margin: 8px 18px 0 18px;
+      color: rgba(107, 120, 151, 1);
 
     }
-    .month-count {
-      font-size: 28px;
+
+    .right-arrow {
+      cursor: pointer;
+
     }
+  }
 
+  .month-bar {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
 
-    &.disabled {
+    .month {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-basis: 88px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      padding: 8px 14px 0 14px;
+      cursor: pointer;
+
       .month-title {
-        color: rgba(0, 0, 0, 0.4);
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: rgba(0, 0, 0, 0.7);
+
       }
+
       .month-count {
-        color: rgba(0, 0, 0, 0.4);
+        font-size: 28px;
       }
-    }
 
-    &.selected {
-      .month-title {
-        border-radius: 100%;
-        background: rgba(0, 163, 255, 0.6);
+
+      &.disabled {
+        cursor: default;
+
+        .month-title {
+          color: rgba(0, 0, 0, 0.4);
+        }
+
+        .month-count {
+          color: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      &.selected {
+        .month-title {
+          border-radius: 100%;
+          background: rgba(0, 163, 255, 0.6);
+        }
       }
     }
   }
 }
+

@@ -65,10 +65,14 @@
 .calendar-expand-toggle {
   text-align: center;
   cursor: pointer;
-  transform: rotate(180deg);
+  transform: scaleY(-1);
 
-  .coll {
-    transform: rotate(180deg);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &.coll {
+    transform: scaleY(1);
   }
 
 
