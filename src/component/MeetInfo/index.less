@@ -1,0 +1,81 @@
+@left-font-size: 28px;
+@right-font-size: 20px;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 1);
+  padding: 11px 14px 6px 14px;
+  .left {
+    display: flex;
+    flex-direction: column;
+    .creator {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      .creator-text {
+        font-size: @left-font-size;
+      }
+    }
+    .meeting-name {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      .meeting-name-text {
+        font-size: @left-font-size;
+      }
+    }
+    .third-line {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      .date {
+        font-size: @left-font-size;
+      }
+      .time {
+        font-size: @left-font-size;
+      }
+      .status {
+
+        font-size: @left-font-size;
+      }
+    }
+
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .row-1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+
+    }
+
+    .row-2 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+
+    }
+
+  }
+
+}
+
+.right-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  .right-item-text {
+    font-size: @right-font-size;
+    margin-top: 8px;
+  }
+
+}

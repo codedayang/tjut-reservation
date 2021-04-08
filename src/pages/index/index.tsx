@@ -8,15 +8,26 @@ import RoomItem from "../../component/RoomItem";
 import MeetItem from "../../component/MeetItem";
 import TimeLineCanvas from "../../component/TimeLineCanvas";
 import MonthBar from "../../component/MonthBar";
+import MeetInfo from "../../component/MeetInfo";
 
 const Index: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
 
+  const meetItemMock: MyReservationItem = {
+    "id" : 1,
+    "name" : "Name",
+    "creator" : "创建者",
+    "meetingName" : "会议室名称",
+    "date" : "明天",
+    "time" : "15:00 - 16:00",
+    "status": "未开始"
+  }
+
   return (
     <View className='index' style={{background: "#f0f0f0"}}>
-      <Calendar date={date} onChange={(date: Date) => {
-        setDate(date);
-      }}/>
+      {/*<Calendar date={date} onChange={(date: Date) => {*/}
+      {/*  setDate(date);*/}
+      {/*}}/>*/}
 
       {/*<TimeLineCanvas*/}
       {/*  startHour={8}*/}
@@ -30,13 +41,17 @@ const Index: Taro.FunctionComponent = () => {
       {/*  imgUrl={""}*/}
       {/*  timeBar={[{from: 8, to: 18}]}/>*/}
 
-      <MeetItem title="测试会议" who="123" timeStr="2021年3月24日"/>
+      {/*<MeetItem*/}
 
-      <MonthBar
-        months={[0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0]}
-        curDate={new Date()}
-        onSwitchMonth={(toYear, toMonth) => console.log(toYear, toMonth)}
-      />
+      {/*  {...meetItemMock}/>*/}
+
+
+      <MeetInfo {...meetItemMock} />
+      {/*<MonthBar*/}
+      {/*  months={[0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0]}*/}
+      {/*  curDate={new Date()}*/}
+      {/*  onSwitchMonth={(toYear, toMonth) => console.log(toYear, toMonth)}*/}
+      {/*/>*/}
     </View>
 
 

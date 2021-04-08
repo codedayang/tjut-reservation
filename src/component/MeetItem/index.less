@@ -1,11 +1,14 @@
+@font-color: rgba(0, 0, 0, 0.7);
+@font-size: 28px;
+
 .container {
   margin-right: 16px;
   background: #FFFFFF;
 
-  padding: 16px;
+  padding: 16px 14px 14px 17px;
 
   border-left: 4px solid #3186f6;
-  border-radius: 8px;
+  border-radius: 14px;
 
   cursor: pointer;
 
@@ -13,44 +16,106 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     .title {
+      font-size: 36px;
+      font-weight: 500;
+      margin: 0 6px 0 0;
+      color: @font-color;
 
     }
 
     .status {
+      font-size: @font-size;
+      margin-inline-end: 21px;
+      font-weight: 300;
 
+      &.stand {
+        color: rgba(255, 0, 0, 1);
+      }
+
+      &.running {
+        color: rgba(14, 174, 0, 1);
+      }
+
+      &.ended {
+        color: rgba(139, 139, 139, 1);
+      }
     }
   }
 
-  .first-line {
+  .content {
     display: flex;
     flex-direction: row;
-    .creator {
+    justify-content: space-between;
 
-      display: flex;
-      flex-direction: row;
+    .content-left {
+
+      .first-line {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 3px;
+
+        .creator {
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          margin: 0 6px 0 0;
+
+          .creator-text {
+            font-size: @font-size;
+            margin: 0 0 0 14px;
+            color: @font-color;
+
+          }
+        }
+
+        .meeting-name {
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 0 0 0 34px;
+
+          .meeting-name-text {
+            font-size: @font-size;
+            margin: 0 0 0 14px;
+            color: @font-color;
+
+          }
+        }
+      }
+
+      .second-line {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 3px;
+
+        .date-easyread {
+          font-size: @font-size;
+          color: @font-color;
+          margin-inline-start: 14px;
+        }
+
+        .time {
+          font-size: @font-size;
+          color: @font-color;
+          margin-inline-start: 14px;
+
+        }
+      }
     }
-    .meeting-name {
 
-      display: flex;
-      flex-direction: row;
+
+    .double-arrow {
+      align-self: center;
+
     }
   }
 
-  .second-line {
-    display: flex;
-    flex-direction: row;
-    .date-easyread {
 
-    }
-
-    .time {
-
-    }
-  }
-
-  .double-arrow {
-    float: right;
-    vertical-align: middle;
-  }
 }

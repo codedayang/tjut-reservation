@@ -3,47 +3,70 @@ import {Text, View} from "@tarojs/components";
 import './index.less'
 import IconFont from "../iconfont";
 
-type Prop = {
-  title: string;
-  who: string;
-  timeStr: string;
-};
-const MeetItem: Taro.FunctionComponent<Prop> = ({title, who, timeStr}) => {
-  return (
-    <View className="container">
+type Prop = MyReservationItem;
+const MeetItem: Taro.FunctionComponent<Prop> =
+  ({
+     id,
+     name,
+     creator,
+     meetingName,
+     date,
+     time,
+     status
+  }) => {
 
-      <View className="double-arrow">
-        <IconFont name={"double-left-arrow"}/>
-      </View>
-      <View className="title-line">
-        <View className="title">
-          Name
+    let statusClassname = "";
+    switch (status) {
+      case "未开始":
+        statusClassname += "stand";
+        break;
+      case "进行中":
+        statusClassname += "running";
+        break;
+      case "已结束":
+        statusClassname += "ended";
+    }
+    return (
+      <View className="container" key={id}>
+        <View className="title-line">
+          <View className="title">
+            {name}
+          </View>
+          <View className={`status ${statusClassname}`}>
+            {status}
+          </View>
         </View>
-        <View className="status">
-          未开始
+
+        <View className="content">
+          <View className="content-left">
+            <View className="first-line">
+              <View className="creator">
+                <IconFont name={"creator"} size={26}/>
+                <Text className="creator-text">{creator}</Text>
+              </View>
+              <View className="meeting-name">
+                <IconFont name={"meetingName"} size={26}/>
+                <Text className="meeting-name-text">{meetingName}</Text>
+              </View>
+            </View>
+
+            <View className="second-line">
+              <IconFont name={"date"} size={26}/>
+              <Text className={"date-easyread"}>{date}</Text>
+              <Text className={"time"}>{time}</Text>
+            </View>
+          </View>
+
+
+          <View className="double-arrow">
+            <IconFont name={"double-left-arrow"} size={38}/>
+          </View>
         </View>
+
+
+
       </View>
-
-      <View className="first-line">
-        <View className="creator">
-          <IconFont name={"creator"}/>
-          <Text>创建者</Text>
-        </View>
-        <View className="meeting-name">
-          <IconFont name={"meetingName"}/>
-          <Text>会议室名称</Text>
-        </View>
-      </View>
-
-      <View className="second-line">
-        <IconFont name={"date"}/>
-        <Text className={"date-easyread"}>明天</Text>
-        <Text className={"time"}>15:00~16:00</Text>
-      </View>
-
-
-    </View>
-  );
+    );
 }
 
 export default MeetItem;
