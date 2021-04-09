@@ -1,13 +1,21 @@
-import Taro from "@tarojs/taro";
+import Taro, {useDidShow} from "@tarojs/taro";
 import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
+import {login} from "../../service/api";
 type Props = {
 
 }
 const MeetForm: Taro.FunctionComponent<Props> = (props) => {
-
+  useDidShow(() => {
+    // login({
+    //   code: "123"
+    // });
+  })
   const handleSubmit = (e) => {
     console.log(e);
+    // login({
+    //   code: "123"
+    // });
   }
 
   return (

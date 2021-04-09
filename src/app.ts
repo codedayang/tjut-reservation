@@ -1,19 +1,46 @@
-import { Component } from 'react'
 import './app.less'
-class App extends Component {
+import Taro, {useDidShow} from "@tarojs/taro";
+import {login} from "./service/api";
 
-  componentDidMount () {}
+const App: Taro.FunctionComponent<any> = (props) => {
+  useDidShow(() => {
+    console.log("Reda")
+    Taro.showLoading();
+    Taro.login({
+      success: result => {
+        Taro.hideLoading()
+        if (result.code) {
 
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
-  // this.props.children 是将要会渲染的页面
-  render () {
-    return this.props.children
-  }
+        } else {
+          Taro.showToast({
+            title: "登录失败"
+          })
+        }
+      }
+    })
+    // Taro.getUserProfile({
+    //   desc: "你猜"
+    // })
+    // Taro.showLoading();
+    // Taro.authorize({
+    //   scope: "scope.userInfo",
+    //   success: res => {
+    //     Taro.hideLoading();
+    //     Taro.showToast({
+    //       title: "成功"
+    //     })
+    //   },
+    //   fail: res => {
+    //     Taro.showToast({
+    //       title: "失败"
+    //     })
+    //   }
+    // })
+    // setTimeout(() => {
+    // }, 2100);
+  })
+  return (
+    props.children
+  )
 }
-
 export default App

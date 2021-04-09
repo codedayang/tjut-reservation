@@ -20,6 +20,13 @@ const config = {
   },
   framework: 'react',
   mini: {
+    webpackChain (chain, webpack) {
+      chain.merge({
+        node: {
+          fs: 'empty'
+        }
+      })
+    },
     postcss: {
       pxtransform: {
         enable: true,

@@ -1,0 +1,15 @@
+.container {
+  padding: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .login-hint {
+  font-size: 48px;
+}
+.container .login-button {
+  margin: 16px;
+}
+/*# sourceMappingURL=index.css.map */
