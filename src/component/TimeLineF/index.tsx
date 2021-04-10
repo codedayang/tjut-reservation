@@ -48,6 +48,10 @@ const TimeLineF: Taro.FunctionComponent<Props> = ({startHour, endHour, bar}) => 
       <View className="bar">
         {sec}
       </View>
+      <View className="last-line">
+        <Text className="last-line-item">8:00</Text>
+        <Text className="last-line-item">23:00</Text>
+      </View>
     </View>
   );
 }
