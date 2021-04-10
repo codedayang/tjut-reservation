@@ -1,0 +1,24 @@
+.mymeet-container {
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  height: 100vh;
+}
+.mymeet-container .header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background: #ffffff;
+  padding-bottom: 24px;
+}
+.mymeet-container .divider {
+  height: 4px;
+  width: 100%;
+  background: #e0e0e0;
+}
+.mymeet-container .meet-list {
+  margin: 24px;
+}
+/*# sourceMappingURL=index.css.map */

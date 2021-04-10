@@ -1,68 +1,68 @@
-.container {
+.meet-info-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background: #ffffff;
   padding: 11px 14px 12px 24px;
 }
-.container .left {
+.meet-info-container .left {
   display: flex;
   flex-direction: column;
 }
-.container .left .creator {
+.meet-info-container .left .creator {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
-.container .left .creator .creator-text {
+.meet-info-container .left .creator .creator-text {
   font-size: 28px;
   margin-inline-start: 12px;
 }
-.container .left .meeting-name {
+.meet-info-container .left .meeting-name {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
-.container .left .meeting-name .meeting-name-text {
+.meet-info-container .left .meeting-name .meeting-name-text {
   font-size: 28px;
   margin-inline-start: 12px;
 }
-.container .left .third-line {
+.meet-info-container .left .third-line {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
-.container .left .third-line .date {
+.meet-info-container .left .third-line .date {
   font-size: 28px;
   margin-inline-start: 12px;
 }
-.container .left .third-line .time {
+.meet-info-container .left .third-line .time {
   font-size: 28px;
   margin-inline-start: 12px;
 }
-.container .left .third-line .status {
+.meet-info-container .left .third-line .status {
   font-size: 28px;
   margin-inline-start: 12px;
 }
-.container .right {
+.meet-info-container .right {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
-.container .right .row-1 {
+.meet-info-container .right .row-1 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.container .right .row-2 {
+.meet-info-container .right .row-2 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.right-item {
+.meet-info-right-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,7 +70,7 @@
   padding: 18px;
   cursor: pointer;
 }
-.right-item .right-item-text {
+.meet-info-right-item .right-item-text {
   font-size: 20px;
   margin-top: 8px;
 }

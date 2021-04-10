@@ -1,20 +1,46 @@
 import Taro, {useDidShow} from "@tarojs/taro";
 import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
+import {getRevs, MeetingRoom, postRev} from "../../service/api";
+import {useState} from "react";
 type Props = {
 
 }
+
+const Rooms = [
+
+]
 const MeetForm: Taro.FunctionComponent<Props> = (props) => {
-  useDidShow(() => {
-    // login({
-    //   code: "123"
-    // });
+  const [roomList, setRoomList] = useState<MeetingRoom[]>([]);
+
+  const [roomText, setRoomText] = useState("请选择会议室");
+
+  useDidShow(async () => {
+    Taro.showLoading();
+    const date = new Date();
+    const res = await getRevs({
+      year: (date.getFullYear()).toString(),
+      month: (date.getMonth() + 1).toString()
+    });
+
+    setRoomList(res.data.meetingRoom);
+    Taro.hideLoading()
   })
   const handleSubmit = (e) => {
     console.log(e);
     // login({
     //   code: "123"
     // });
+    Taro.showLoading();
+    postRev({
+      content: "",
+      date: "",
+      endTime: "",
+      name: "",
+      roomId: 0,
+      startTime: "",
+      token: ""
+    })
   }
 
   return (
@@ -30,10 +56,12 @@ const MeetForm: Taro.FunctionComponent<Props> = (props) => {
           <Text className="form-item-left">会议室</Text>
           <Picker
             mode="selector"
-            range={["108","109","411"]}
-            onChange={(e) => console.log(e)}
+            range={roomList.map(it => it.name)}
+            onChange={(e) => {
+              console.log(e)
+            }}
             className="form-item-right">
-            <View>当前选择</View>
+            <View>{roomText}</View>
           </Picker>
         </View>
         <View className="divider"/>

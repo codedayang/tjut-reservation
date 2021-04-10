@@ -14,9 +14,9 @@ const MonthBar: Taro.FunctionComponent<Props> = ({months, curDate, onSwitchMonth
   const [curYear, setCurYear] = useState(curDate.getFullYear());
 
   const handleClick = (i) => {
-    if (i > todayMonth) {
-      return;
-    }
+    // if (i > todayMonth) {
+    //   return;
+    // }
     setSelectedMonth(i);
     onSwitchMonth(curYear, i);
   }
@@ -57,7 +57,7 @@ const MonthBar: Taro.FunctionComponent<Props> = ({months, curDate, onSwitchMonth
           if (selectedMonth == i) {
             cn += " selected";
           } else if (i > todayMonth) {
-            cn += " disabled"
+            // cn += " disabled"
           }
           return (
             <View className={cn} key={i} onClick={() => handleClick(i)}>

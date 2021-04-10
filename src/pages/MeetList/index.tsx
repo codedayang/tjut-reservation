@@ -29,8 +29,8 @@ const MeetList: Taro.FunctionComponent = () => {
     })
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
-    setDate(new Date());
-    console.log(res.data.day)
+    // setDate(new Date());
+    // console.log(res.data.day)
     Taro.hideLoading();
 
   }
@@ -46,7 +46,7 @@ const MeetList: Taro.FunctionComponent = () => {
   }
 
   const today = monthData.find(it => parseInt(it.dayOfMonth) == date.getDate());
-  console.log(today)
+  // console.log(today)
   return (
     <View className='meet-list-container' style={{background: "#f0f0f0"}}>
       <Calendar
@@ -60,7 +60,7 @@ const MeetList: Taro.FunctionComponent = () => {
           return (
             <View className="room-list-item" onClick={() => {
               Taro.navigateTo({
-                url: `../RoomDetail/index?roomid=${item.roomid}&curDay=${today.dayOfMonth}`
+                url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${today.dayOfMonth}`
               })
             }}>
               <RoomItem

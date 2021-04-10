@@ -1,9 +1,34 @@
-.month-bar {
+.month-bar-container {
+  background: #FFFFFF;
+  padding: 0 12px 24px 12px;
+}
+.month-bar-container .year-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-inline-end: 32px;
+}
+.month-bar-container .year-bar .left-arrow {
+  cursor: pointer;
+}
+.month-bar-container .year-bar .year-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 18px 0 18px;
+  color: #6b7897;
+}
+.month-bar-container .year-bar .right-arrow {
+  cursor: pointer;
+}
+.month-bar-container .month-bar {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
 }
-.month-bar .month {
+.month-bar-container .month-bar .month {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,10 +36,10 @@
   flex-basis: 88px;
   flex-shrink: 0;
   white-space: nowrap;
-  padding: 14px;
+  padding: 8px 14px 0 14px;
   cursor: pointer;
 }
-.month-bar .month .month-title {
+.month-bar-container .month-bar .month .month-title {
   width: 60px;
   height: 60px;
   font-size: 32px;
@@ -22,17 +47,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: rgba(0, 0, 0, 0.7);
 }
-.month-bar .month .month-count {
+.month-bar-container .month-bar .month .month-count {
   font-size: 28px;
 }
-.month-bar .month.disabled .month-title {
+.month-bar-container .month-bar .month.disabled {
+  cursor: default;
+}
+.month-bar-container .month-bar .month.disabled .month-title {
   color: rgba(0, 0, 0, 0.4);
 }
-.month-bar .month.disabled .month-count {
+.month-bar-container .month-bar .month.disabled .month-count {
   color: rgba(0, 0, 0, 0.4);
 }
-.month-bar .month.selected .month-title {
+.month-bar-container .month-bar .month.selected .month-title {
   border-radius: 100%;
   background: rgba(0, 163, 255, 0.6);
 }

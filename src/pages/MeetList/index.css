@@ -1,5 +1,12 @@
-.index {
-  padding: 30px;
+.meet-list-container {
   height: 100vh;
+}
+.meet-list-container .room-list {
+  display: flex;
+  flex-direction: column;
+  margin: 28px;
+}
+.meet-list-container .room-list .room-list-item {
+  margin-top: 16px;
 }
 /*# sourceMappingURL=index.css.map */

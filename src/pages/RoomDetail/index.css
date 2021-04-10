@@ -1,0 +1,36 @@
+.room-detail-container {
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  height: 100vh;
+}
+.room-detail-container .room-detail-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 24px;
+  background: #FFFFFF;
+}
+.room-detail-container .room-detail-header .header-left {
+  display: flex;
+  flex-direction: column;
+}
+.room-detail-container .room-detail-header .header-right .rev-btn {
+  background: #23a9f4;
+  border-radius: 10%;
+  color: #FFFFFF;
+  padding: 18px 26px 18px 26px;
+  font-size: 42px;
+  cursor: pointer;
+}
+.room-detail-container .time-line {
+  background: #FFFFFF;
+  padding: 4% 2.5% 4% 2.5%;
+}
+.room-detail-container .meet-list .meet-item-container {
+  background: #FFFFFF;
+  margin: 16px;
+  padding: 24px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=index.css.map */
