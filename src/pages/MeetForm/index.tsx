@@ -1,8 +1,9 @@
-import Taro, {useDidShow} from "@tarojs/taro";
+import Taro, {useDidShow, useRouter} from "@tarojs/taro";
 import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
 import {getRevs, MeetingRoom, postRev} from "../../service/api";
 import {useState} from "react";
+
 const MeetForm: Taro.FunctionComponent = () => {
   const [roomList, setRoomList] = useState<MeetingRoom[]>([]);
 
@@ -14,6 +15,9 @@ const MeetForm: Taro.FunctionComponent = () => {
   const [endTime, setEndTime] = useState("结束时间");
   const [content, setContent] = useState("");
 
+
+
+  const {params} = useRouter();
   useDidShow(async () => {
     Taro.showLoading();
     const date = new Date();
@@ -23,8 +27,26 @@ const MeetForm: Taro.FunctionComponent = () => {
     });
 
     setRoomList(res.data.meetingRoom);
+    const rooml = res.data.meetingRoom;
+
+
+    // console.log(params)
+    const roomid = params.roomid;
+    // console.log(rooml)
+    if (roomid) {
+      setRoomText(rooml.find(it => it.roomid == parseInt(roomid!))!.name);
+      setRoomId(parseInt(roomid!));
+    }
+    const pdate = params.pdate; //yyyy-mm-dd
+    if (pdate) {
+      setDate(pdate);
+    }
+
     Taro.hideLoading()
   })
+
+
+
   const handleSubmit = async (e) => {
     if (name == "") {
       Taro.showToast({
@@ -175,8 +197,6 @@ const MeetForm: Taro.FunctionComponent = () => {
           <View className="form-item-right time-input-container">
             <Picker
               mode="time"
-              start="8:00"
-              end="23:00"
               value={startTime}
               onChange={(e) => {
                 setStartTime(e.detail.value)
@@ -189,8 +209,6 @@ const MeetForm: Taro.FunctionComponent = () => {
 
             <Picker
               mode="time"
-              start="8:00"
-              end="23:00"
               value={endTime}
               onChange={(e) => {
                 setEndTime(e.detail.value)
@@ -218,6 +236,6 @@ const MeetForm: Taro.FunctionComponent = () => {
       </Form>
     </View>
   )
-}
+};
 
 export default MeetForm;
