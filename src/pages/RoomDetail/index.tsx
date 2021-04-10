@@ -1,5 +1,5 @@
 import Taro, {useDidShow, useRouter} from "@tarojs/taro";
-import {Button, View} from "@tarojs/components";
+import {Button, Text, View} from "@tarojs/components";
 import './index.less'
 import {Day, getRevs, MeetingRoom} from "../../service/api";
 import IconFont from "../../component/iconfont";
@@ -52,17 +52,19 @@ const RoomDetail: Taro.FunctionComponent = () => {
 
   return (
     <View className="room-detail-container">
+      <View className="top-line"/>
       <View className="room-detail-header">
         <View className="header-left">
           <View className="title">
             {curRoom?.name}
           </View>
           <View className="time">
-            <IconFont name={"date"} size={26}/>
+            <IconFont name={"date"} size={25} color={"#444444"}/>
+            <View className="date-text">{curRoom?.date}</View>
             <View className="time-text">{curRoom?.time}</View>
           </View>
           <View className="remark">
-            <View className="remark-text">备注{curRoom?.remark}</View>
+            <View className="remark-text">备注: {curRoom?.remark}</View>
           </View>
         </View>
         <View className="header-right">
@@ -73,10 +75,18 @@ const RoomDetail: Taro.FunctionComponent = () => {
                 url: "../MeetForm/index"
               })
             }}>
-            预约
+            <Text>
+              预约
+            </Text>
           </View>
         </View>
+
       </View>
+
+      <View className="center-line">
+        <View className="line"/>
+      </View>
+
       <Calendar
         date={date}
         onChange={handleCalendarChange}
