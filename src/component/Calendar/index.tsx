@@ -33,8 +33,10 @@ const getWeekItem = (
         setCurDate(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
         onChange(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
       }}>
-        <View className={cn}>
-          {day}
+        <View className="calendar-item-button-around">
+          <View className={cn}>
+            {day}
+          </View>
           <Text className="calendar-item-mark">{dayList.find(it => parseInt(it.dayOfMonth) == day)?.count}</Text>
         </View>
       </View>

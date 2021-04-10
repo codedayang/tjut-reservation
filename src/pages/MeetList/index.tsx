@@ -56,7 +56,7 @@ const MeetList: Taro.FunctionComponent = () => {
       />
 
       <View className="room-list">
-        {today?.meetingRoomInfo.map(item => {
+        {today?.meetingRoomInfo.map((item, index) => {
           return (
             <View className="room-list-item" onClick={() => {
               Taro.navigateTo({
@@ -65,7 +65,7 @@ const MeetList: Taro.FunctionComponent = () => {
             }}>
               <RoomItem
                 {...roomData.find(it => it.roomid == item.roomid)!!}
-                bar={item.bar}/>
+                bar={item.bar} index={index}/>
             </View>
 
 
