@@ -51,6 +51,8 @@ const rspInterceptor = (chain) => {
         });
       }
 
+    } else if (res.data.code == "A0400") {
+      return Promise.reject('请求出错');
     } else if (res.data.code != "00000") {
       return Promise.reject('请求出错');
     } else {

@@ -56,21 +56,48 @@ const MeetList: Taro.FunctionComponent = () => {
       />
 
       <View className="room-list">
-        {today?.meetingRoomInfo.map((item, index) => {
-          return (
-            <View className="room-list-item" onClick={() => {
+        {roomData.map((item, index) => {
+          const data = today?.meetingRoomInfo.find(it => it.roomid == item.roomid);
+
+          if (data) {
+            return (
+              <View className="room-list-item" onClick={() => {
+                Taro.navigateTo({
+                  url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${date.getDate()}`
+                })
+              }}>
+                <RoomItem
+                  {...item}
+                  bar={data.bar} index={index}/>
+              </View>
+            )
+          } else {
+            return (<View className="room-list-item" onClick={() => {
               Taro.navigateTo({
-                url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${today.dayOfMonth}`
+                url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${date.getDate()}`
               })
             }}>
               <RoomItem
-                {...roomData.find(it => it.roomid == item.roomid)!!}
-                bar={item.bar} index={index}/>
-            </View>
-
-
-          )
+                {...item}
+                bar={[]} index={index}/>
+            </View>)
+          }
         })}
+        {/*{today?.meetingRoomInfo.map((item, index) => {*/}
+        {/*  return (*/}
+        {/*    <View className="room-list-item" onClick={() => {*/}
+        {/*      Taro.navigateTo({*/}
+        {/*        url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${today.dayOfMonth}`*/}
+        {/*      })*/}
+        {/*    }}>*/}
+        {/*      <RoomItem*/}
+        {/*        {...roomData.find(it => it.roomid == item.roomid)!!}*/}
+        {/*        bar={item.bar} index={index}/>*/}
+        {/*    </View>*/}
+
+
+        {/*  )*/}
+        {/*})}*/}
       </View>
 
 

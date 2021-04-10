@@ -10,7 +10,6 @@ import {useState} from "react";
 
 const RoomDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
-
   const [date, setDate] = useState(
     new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
   const [monthData, setMonthData] = useState<Day[]>([]);
