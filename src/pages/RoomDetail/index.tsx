@@ -72,7 +72,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
             className="rev-btn"
             onClick={() => {
               Taro.navigateTo({
-                url: "../MeetForm/index"
+                url: `../MeetForm/index?roomid=${roomid}&pdate=${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
               })
             }}>
             <Text>
@@ -114,15 +114,6 @@ const RoomDetail: Taro.FunctionComponent = () => {
                 onClick={() => {
                   Taro.navigateTo({
                     url: `../MeetDetail/index?meetid=${info.id}`,
-                    events: {
-                      acceptDataFromOpenedPage: function(data) {
-                        console.log(data);
-                        Taro.showToast({
-                          title: "132465",
-                          icon: "none"
-                        });
-                      }
-                    }
                   })
                   // Taro.eventCenter.once("acceptDataFromOpenedPage", (res) => {
                   //   console.log(res);

@@ -26,7 +26,7 @@ const rspInterceptor = (chain) => {
   return chain.proceed(requestParams).then((res) => {
     // console.log(requestParams);
     // if (res.data.code != "A0220") {
-    if (res.data.code == "A0400" || res.data.code == "A0220") {
+    if ((res.data.code == "A0400" && res.data.message.includes("token")) || res.data.code == "A0220") {
       if (!onr) {
         onr = true;
         loginAndTokenOrRedirect().then((stop) => {
