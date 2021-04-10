@@ -10,9 +10,9 @@ const config = {
   sourceRoot: 'src',
   outputRoot: 'dist',
   plugins: [
-    ['@tarojs/plugin-mock', {
-    host: "192.168.1.105"
-    }]
+    // ['@tarojs/plugin-mock', {
+    // host: "192.168.115.59"
+    // }]
   ]
   ,
   defineConstants: {

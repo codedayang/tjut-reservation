@@ -3,11 +3,11 @@ import { useGlobalIconFont } from './component/iconfont/helper';
 export default {
   pages: [
     'pages/MeetList/index',
+    'pages/MeetForm/index',
     'pages/RoomDetail/index',
     'pages/MyMeet/index',
     'pages/UserAuth/index',
     'pages/MeetDetail/index',
-    'pages/MeetForm/index',
     'pages/Setting/index',
     'pages/index/index'
   ],

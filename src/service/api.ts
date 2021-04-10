@@ -144,7 +144,6 @@ export const getRev = async (req: GetRevReq) =>
   });
 
 export type PostRevReq = {
-  token : string,
   name : string,
   roomId : number,
   date : string,
