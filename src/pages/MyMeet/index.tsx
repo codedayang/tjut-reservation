@@ -38,7 +38,14 @@ const MyMeet: Taro.FunctionComponent = () => {
     <View className="mymeet-container">
       <View className="header">
         <View>我的会议安排</View>
-        <Button size={"mini"} style={{margin: "0"}}>预约会议室</Button>
+        <Button
+          size={"mini"}
+          style={{margin: "0"}}
+          onClick={() => {
+            Taro.navigateTo({
+              url: `../MeetForm/index`
+            })
+          }}>预约会议室</Button>
       </View>
       <View className="divider"/>
       <MonthBar months={month} curDate={date} onSwitchMonth={handleSwitchMonth}/>
