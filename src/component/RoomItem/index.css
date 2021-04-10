@@ -1,0 +1,75 @@
+.container {
+  background: #FFF;
+  padding: 5px 12px 0 12px;
+  border-radius: 10px;
+}
+.container .info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container .info .img {
+  display: flex;
+  width: 180px;
+  height: 180px;
+  background: #3086f5;
+  margin: 16px 0 16px 0;
+  justify-content: center;
+  align-items: center;
+  font-size: 58px;
+  color: #FFF;
+}
+.container .info .info-left {
+  margin: 12px 16px 0 0;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.container .info .info-left .title {
+  font-weight: bold;
+  font-size: 45px;
+}
+.container .info .info-left .desc {
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.container .info .info-left .date-time {
+  display: flex;
+  justify-content: flex-start;
+}
+.container .info .info-left .date-time > View {
+  margin-left: 15px;
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.container .info .info-left-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.container .info .info-left-left .index {
+  background-color: rgba(255, 43, 43, 0.2);
+  height: 50px;
+  width: 50px;
+  margin-top: -5px;
+  margin-right: -12px;
+  border-bottom-left-radius: 40%;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+.container .info .info-left-left .index > Text {
+  color: rgba(255, 0, 0, 0.5);
+  font-size: 30px;
+}
+.container .info .info-left-left .icon-double-left-arrow {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/*# sourceMappingURL=index.css.map */

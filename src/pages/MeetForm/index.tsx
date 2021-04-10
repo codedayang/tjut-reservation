@@ -59,6 +59,7 @@ const MeetForm: Taro.FunctionComponent<Props> = (props) => {
             range={roomList.map(it => it.name)}
             onChange={(e) => {
               console.log(e)
+              setRoomText(e.detail.value.toString())
             }}
             className="form-item-right">
             <View>{roomText}</View>

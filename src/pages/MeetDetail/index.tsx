@@ -1,4 +1,4 @@
-import Taro, {useRouter, useDidShow} from "@tarojs/taro";
+import Taro, {useRouter, useDidShow, getCurrentPages} from "@tarojs/taro";
 import {Image, View} from "@tarojs/components";
 import {getRev, GetRevRes} from "../../service/api";
 import {useState} from "react";
@@ -13,10 +13,27 @@ const MeetDetail: Taro.FunctionComponent = () => {
     const res = await getRev({
       id: parseInt(meetId!)
     })
-
-    setData(res);
-    console.log(res);
     Taro.hideLoading();
+
+    if (res.code == "A0300") {
+      Taro.showToast({
+        title: res.message,
+        icon: "none",
+        duration: 500
+      });
+      setTimeout(() => {
+        Taro.navigateBack();
+      }, 500)
+    }
+    // const pages = getCurrentPages();
+    // const current = pages[pages.length - 1];
+    // const channel = current.getOpenerEventChannel();
+    // channel.emit("acceptDataFromOpenedPage", {d: "ok"})
+    //
+    //
+    // Taro.navigateBack();
+    setData(res);
+    // console.log(res);
   })
 
   const [data, setData] = useState<GetRevRes>();

@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
 import { baseUrl } from '../config';
 import {login} from "./api";
+import * as url from "url";
 
 
 let onr = false;
@@ -10,22 +11,36 @@ export const loginAndTokenOrRedirect = async () => {
   const res = await login({code: code});
   Taro.setStorageSync("token", res.data.token);
   // return res.data.needAuth;
-  if (res.data.needAuth) {
-    await Taro.navigateTo({
-      url: "../UserAuth/index"
-    })
-  }
+    if (res.data.needAuth) {
+      await Taro.navigateTo({
+        url: "../UserAuth/index"
+      });
+      return true;
+    }
+
+  return false;
 }
 
 const rspInterceptor = (chain) => {
   const requestParams = chain.requestParams;
   return chain.proceed(requestParams).then((res) => {
     // console.log(requestParams);
-    if (res.data.code == "A0220") {
+    // if (res.data.code != "A0220") {
+    if (res.data.code == "A0400" || res.data.code == "A0220") {
       if (!onr) {
         onr = true;
-        loginAndTokenOrRedirect().then(() => {
+        loginAndTokenOrRedirect().then((stop) => {
           onr = false;
+          if (stop) {
+            // console.log("stop")
+            return;
+          }
+          console.log(url)
+          if (requestParams.url.includes("login")) {
+            // console.log("skipped")
+            return;
+          }
+
           return Taro.request(requestParams).then(r => {
             requestParams.success = null;
             // console.log(requestParams)
