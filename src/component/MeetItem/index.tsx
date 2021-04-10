@@ -28,7 +28,14 @@ const MeetItem: Taro.FunctionComponent<Prop> =
         statusClassname += "ended";
     }
     return (
-      <View className="meet-item-container" key={id}>
+      <View
+        className="meet-item-container"
+        key={id}
+        onClick={() => {
+          Taro.navigateTo({
+            url: `../MeetDetail/index?meetid=${id}`,
+          })
+        }}>
         <View className="title-line">
           <View className="title">
             {name}
