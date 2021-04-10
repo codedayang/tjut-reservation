@@ -113,6 +113,56 @@ export const getRevs = async (req: GetRevsReq) =>
     }
   );
 
+export type GetRevReq = {
+  id: number;
+}
+
+export type MeetParticipant = {
+  id: string,
+  name: string,
+  nickName: string,
+  avatarUrl: string;
+};
+
+export type GetRevRes = BaseRes<{
+  isCreator : boolean,
+  id : number,
+  name : string,
+  creator :string,
+  meetingName : string,
+  date : string,
+  time : string,
+  content : string,
+  participant: MeetParticipant[]
+}>
+
+export const getRev = async (req: GetRevReq) =>
+  await Request<GetRevReq, GetRevRes>({
+    url: "/getReservation",
+    method: "POST",
+    data: req
+  });
+
+export type PostRevReq = {
+  token : string,
+  name : string,
+  roomId : number,
+  date : string,
+  startTime: string,
+  endTime : string,
+  content : string
+}
+
+export type PostRevRes = BaseRes<{}>;
+
+export const postRev = async (req: PostRevReq) =>
+  await Request<PostRevReq, PostRevRes>({
+    url: "/postReservation",
+    method: "POST",
+    data: req
+  });
+
+
 
 
 export const getMyRev = async (req: GetMyRevReq) =>

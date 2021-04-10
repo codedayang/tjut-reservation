@@ -1,9 +1,16 @@
 .room-detail-container {
+
+  display: flex;
+  flex-direction: column;
+  //padding: 0 24px 0 24px;
+  background: #f2f2f2;
+  height: 100vh;
   .room-detail-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 24px;
+    background: #FFFFFF;
     .header-left {
       display: flex;
       flex-direction: column;
@@ -11,7 +18,31 @@
     }
 
     .header-right {
+      .rev-btn {
+        background: #23a9f4;
+        border-radius: 10%;
+        color: #FFFFFF;
+        padding: 18px 26px 18px 26px;
+        font-size: 42px;
+        cursor: pointer;
+      }
+    }
 
+
+  }
+
+  .time-line {
+    background: #FFFFFF;
+    padding: 4% 2.5% 4% 2.5%;
+
+  }
+
+  .meet-list {
+    .meet-item-container {
+      background: #FFFFFF;
+      margin: 16px;
+      padding: 24px;
+      cursor: pointer;
     }
   }
 }

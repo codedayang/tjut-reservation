@@ -1,32 +1,54 @@
 import Taro, {useDidShow, useRouter} from "@tarojs/taro";
 import {Button, View} from "@tarojs/components";
 import './index.less'
-import MonthBar from "../../component/MonthBar";
-import {useState} from "react";
-import {Day, getMyRev, MeetingRoom, MeetingRoomInfo, MyMeetInfo} from "../../service/api";
-import MeetItem from "../../component/MeetItem";
+import {Day, getRevs, MeetingRoom} from "../../service/api";
 import IconFont from "../../component/iconfont";
+import Calendar from "../../component/Calendar";
+import TimeLineF from "../../component/TimeLineF";
+import {useState} from "react";
 
 
 const RoomDetail: Taro.FunctionComponent = () => {
-  // useDidShow(async () => {
-  //   Taro.showLoading();
-  //
-  //   Taro.hideLoading();
-  //
-  //
-  // })
-  const router = useRouter();
-  console.log(param);
+  const {params} = useRouter();
 
-  const [days, setDays] = useState([]);
-  const [rooms, setRooms] = useState(roomList);
+  const [date, setDate] = useState(
+    new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
+  const [monthData, setMonthData] = useState<Day[]>([]);
+  const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
-  const [curDay, setCurDay] = useState(router.params.curDay);
-  const roomid = router.params.roomid
+  const handleCalendarChange = async (cdate: Date) => {
+    let reload = false;
+    if (cdate.getMonth() != date.getMonth()) {
+      reload = true;
+    }
+    setDate(cdate);
+    if (reload) {
+      await load();
+    }
+  }
+
+  const load = async () => {
+    Taro.showLoading();
+    const res = await getRevs({
+      year: date.getFullYear().toString(),
+      month: (date.getMonth() + 1).toString()
+    })
+    setMonthData(res.data.day);
+    setRoomData(res.data.meetingRoom);
+    console.log(res.data.day)
+    Taro.hideLoading();
+
+  }
 
 
-  const curRoom = rooms.find(it => it.roomid == roomid);
+  useDidShow(async () => {
+    await load()
+  })
+
+  const roomid = parseInt(params.roomid!!)
+
+
+  const curRoom = roomData.find(it => it.roomid == roomid);
 
 
   return (
@@ -45,11 +67,55 @@ const RoomDetail: Taro.FunctionComponent = () => {
           </View>
         </View>
         <View className="header-right">
-          <View className="rev-btn">
+          <View
+            className="rev-btn"
+            onClick={() => {
+              Taro.navigateTo({
+                url: "../MeetForm/index"
+              })
+            }}>
             预约
           </View>
         </View>
       </View>
+      <Calendar
+        date={date}
+        onChange={handleCalendarChange}
+        dayList={monthData}
+      />
+      <View className="time-line">
+        <TimeLineF
+          startHour={8}
+          endHour={23}
+          bar={
+            monthData
+              .find(it => parseInt(it.dayOfMonth) == date.getDate())?.meetingRoomInfo
+              .find(it => it.roomid == roomid)?.bar
+          }/>
+      </View>
+
+      <View className="meet-list">
+        {monthData
+          .find(it => parseInt(it.dayOfMonth) == date.getDate())?.meetingRoomInfo
+          .find(room => room.roomid == roomid)?.meetingInfo.map(info => {
+            return (
+              <View
+                className="meet-item-container"
+                key={info.id}
+                onClick={() => {
+                  Taro.navigateTo({
+                    url: `../MeetDetail/index?meetid=${info.id}`
+                  })
+                }}>
+                <View>{info.name}</View>
+                <View>{info.creator}</View>
+                <View>{info.date} {info.time}</View>
+              </View>
+            );
+          })
+        }
+      </View>
+
     </View>
   );
 };

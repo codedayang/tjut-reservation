@@ -9,6 +9,10 @@
 .container .login-hint {
   font-size: 48px;
 }
+.container .name-input {
+  background: #FFF;
+  border: 4px solid #000;
+}
 .container .login-button {
   margin: 16px;
 }

@@ -6,6 +6,7 @@ export default {
     'pages/RoomDetail/index',
     'pages/MyMeet/index',
     'pages/UserAuth/index',
+    'pages/MeetDetail/index',
     'pages/MeetForm/index',
     'pages/Setting/index',
     'pages/index/index'

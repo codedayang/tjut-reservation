@@ -1,0 +1,85 @@
+.meet-item-container {
+  background: #FFFFFF;
+  padding: 20px 18px 20px 24px;
+  border-left: 4px solid #3186f6;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.meet-item-container .title-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.meet-item-container .title-line .title {
+  font-size: 36px;
+  font-weight: 500;
+  margin: 0 6px 0 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+.meet-item-container .title-line .status {
+  font-size: 28px;
+  margin-inline-end: 21px;
+  font-weight: 300;
+}
+.meet-item-container .title-line .status.stand {
+  color: #ff0000;
+}
+.meet-item-container .title-line .status.running {
+  color: #0eae00;
+}
+.meet-item-container .title-line .status.ended {
+  color: #8b8b8b;
+}
+.meet-item-container .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.meet-item-container .content .content-left .first-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 3px;
+}
+.meet-item-container .content .content-left .first-line .creator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 6px 0 0;
+}
+.meet-item-container .content .content-left .first-line .creator .creator-text {
+  font-size: 28px;
+  margin: 0 0 0 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.meet-item-container .content .content-left .first-line .meeting-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0 0 34px;
+}
+.meet-item-container .content .content-left .first-line .meeting-name .meeting-name-text {
+  font-size: 28px;
+  margin: 0 0 0 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.meet-item-container .content .content-left .second-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 3px;
+}
+.meet-item-container .content .content-left .second-line .date-easyread {
+  font-size: 28px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-inline-start: 14px;
+}
+.meet-item-container .content .content-left .second-line .time {
+  font-size: 28px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-inline-start: 14px;
+}
+.meet-item-container .content .double-arrow {
+  align-self: center;
+}
+/*# sourceMappingURL=index.css.map */

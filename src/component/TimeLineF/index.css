@@ -1,0 +1,28 @@
+.time-line-f-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.time-line-f-container .first-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.time-line-f-container .first-line .line-item-text {
+  font-size: 30px;
+}
+.time-line-f-container .bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 3.5% 0 3.5%;
+}
+.time-line-f-container .bar .bar-item {
+  height: 18px;
+  background: #FFFFFF;
+}
+.time-line-f-container .bar .bar-item-selected {
+  height: 18px;
+  background: #a6a9ae;
+}
+/*# sourceMappingURL=index.css.map */

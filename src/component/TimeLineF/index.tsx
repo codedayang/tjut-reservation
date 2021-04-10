@@ -6,7 +6,7 @@ import "./index.less"
 type Props = {
   startHour: number;
   endHour: number;
-  bar: Bar[]
+  bar?: Bar[]
 };
 
 
@@ -25,8 +25,8 @@ const TimeLineF: Taro.FunctionComponent<Props> = ({startHour, endHour, bar}) => 
 
   let cur = 0;
   // let cur = 2.5;
-  console.log(bar);
-  bar.forEach(b => {
+  // console.log(bar);
+  bar?.forEach(b => {
     sec.push(
       <View className="bar-item" style={{width: ((b.start - cur)*100).toString() + "%"}}/>
     );
