@@ -24,7 +24,7 @@ const UserAuth: Taro.FunctionComponent = () => {
 
       const {data} = await loginAuth({
         code: code,
-        name: "",
+        name: name,
         nickName: userInfo.nickName,
         avatarUrl: userInfo.avatarUrl
       })

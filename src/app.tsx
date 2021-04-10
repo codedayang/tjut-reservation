@@ -5,7 +5,7 @@ import {View} from "@tarojs/components";
 
 const App: Taro.FunctionComponent<any> = (props) => {
   useDidShow(async () => {
-    await loginAndTokenOrRedirect();
+    // await loginAndTokenOrRedirect();
   });
   return (
     <View className="app-root">
