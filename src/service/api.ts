@@ -1,9 +1,13 @@
-import Request from 'request';
+import Request from './request';
 export interface BaseRes<T> {
   code: string;
   message: string;
   data: T;
 }
+
+// const rrq = <REQ, RES> (url: string, req: REQ) => Request<REQ, RES>({
+//   url: url, method: "POST", data: req
+// })
 
 export interface LoginReq {
   code: string;
@@ -19,4 +23,104 @@ export const login = async (req: LoginReq) => await Request<LoginReq, LoginRes>(
   method: "POST",
   data: req
 });
+
+export type LoginAuthReq = {
+  code: string;
+  name: string;
+  nickName: string;
+  avatarUrl: string;
+};
+
+export type LoginAuthRes = BaseRes<{
+  token: string;
+}>
+
+export const loginAuth = async (req: LoginAuthReq) =>
+  await Request<LoginAuthReq, LoginAuthRes>({
+    url: "/loginAuth",
+    method: "POST",
+    data: req
+  })
+
+export interface GetMyRevReq {
+  year: string;
+  month: string;
+}
+
+export type MyMeetInfo = {
+  id: number;
+  name: string;
+  creator : string,
+  meetingName : string,
+  date : string,
+  time : string,
+  status: "未开始" | "进行中" | "已结束"
+}
+export type GetMyRevRes = BaseRes<{
+  months: number[];
+  info: MyMeetInfo[];
+}>;
+
+export type GetRevsReq = {
+  year: string;
+  month: string;
+};
+
+export type MeetingRoom = {
+  roomid: number,
+  name : string,
+  date : string,
+  time : string,
+  remark : string
+}
+
+export type MeetingInfo = {
+  id: number,
+  name: string,
+  creator: string,
+  date: string,
+  time: string
+};
+
+export type Bar = {
+  start: number;
+  end: number;
+};
+
+export type MeetingRoomInfo = {
+  roomid: number,
+  count: number,
+  bar: Bar[],
+  meetingInfo: MeetingInfo[];
+};
+
+export type Day = {
+  dayOfMonth: string,
+  count: number,
+  meetingRoomInfo: MeetingRoomInfo[];
+};
+
+export type GetRevsRes = BaseRes<{
+  meetingRoom: MeetingRoom[];
+  day: Day[];
+}>;
+
+export const getRevs = async (req: GetRevsReq) =>
+  await Request<GetRevsReq, GetRevsRes>({
+      url: "/getReservations",
+      method: "POST",
+      data: req
+    }
+  );
+
+
+
+export const getMyRev = async (req: GetMyRevReq) =>
+  await Request<GetMyRevReq, GetMyRevRes>(
+  {
+    url: "/getMyReservations",
+    method: "POST",
+    data: req
+  }
+)
 

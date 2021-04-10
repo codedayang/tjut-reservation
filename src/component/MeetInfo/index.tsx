@@ -2,16 +2,17 @@ import Taro from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import './index.less'
 import IconFont, {IconNames} from "../iconfont";
+import {MyMeetInfo} from "../../service/api";
 
 const rightItem = (icon: IconNames, tip: string) => {
   return (
-    <View className="right-item">
+    <View className="meet-info-right-item">
       <IconFont name={icon} />
       <View className="right-item-text">{tip}</View>
     </View>
   )
 }
-type Prop = MyReservationItem;
+type Prop = MyMeetInfo;
 const MeetInfo: Taro.FunctionComponent<Prop> =
   ({
      id,
@@ -24,7 +25,7 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
    }) =>
 {
   return (
-    <View className="container" key={id}>
+    <View className="meet-info-container" key={id}>
       <View className="left">
         <View className="name">
           {name}

@@ -9,7 +9,12 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+  plugins: [
+    ['@tarojs/plugin-mock', {
+    host: "192.168.1.105"
+    }]
+  ]
+  ,
   defineConstants: {
   },
   copy: {
@@ -23,7 +28,9 @@ const config = {
     webpackChain (chain, webpack) {
       chain.merge({
         node: {
-          fs: 'empty'
+          fs: 'empty',
+          net: 'empty',
+          tls: "empty"
         }
       })
     },

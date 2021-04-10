@@ -10,15 +10,15 @@ type Props = {
   onSwitchMonth: (toYear: number, toMonth: number) => void; //月份从零开始
 };
 const MonthBar: Taro.FunctionComponent<Props> = ({months, curDate, onSwitchMonth}) => {
-  const [selectedMonth, setSelectedMonth] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState(curDate.getMonth());
   const [curYear, setCurYear] = useState(curDate.getFullYear());
 
   const handleClick = (i) => {
     if (i > todayMonth) {
       return;
     }
-    onSwitchMonth(curYear, i);
     setSelectedMonth(i);
+    onSwitchMonth(curYear, i);
   }
 
   const handleClickYear = (direction: "left" | "right") => {
@@ -38,7 +38,7 @@ const MonthBar: Taro.FunctionComponent<Props> = ({months, curDate, onSwitchMonth
 
   const todayMonth = curDate.getMonth();
   return (
-    <View className="container">
+    <View className="month-bar-container">
 
       <View className="year-bar">
 

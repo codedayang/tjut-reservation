@@ -5,10 +5,12 @@ import {View, Text} from "@tarojs/components";
 import './index.less'
 import {getCalendarData, getCurrentWeek} from "./utils";
 import IconFont from "../iconfont";
+import {Day} from "../../service/api";
 
 type Prop = {
   date: Date;
   onChange: (date: Date) => void;
+  dayList: Day[]
 
 };
 
@@ -17,7 +19,8 @@ const getWeekItem = (
   today: Date,
   weekList: Array<number>,
   onChange: (date: Date) => void,
-  setCurDate: Dispatch<SetStateAction<Date>>
+  setCurDate: Dispatch<SetStateAction<Date>>,
+  dayList: Day[]
 ) => {
   return weekList.map((day, j) => {
 
@@ -32,7 +35,7 @@ const getWeekItem = (
       }}>
         <View className={cn}>
           {day}
-          <Text className="calendar-item-mark">1</Text>
+          <Text className="calendar-item-mark">{dayList.find(it => parseInt(it.dayOfMonth) == day)?.count}</Text>
         </View>
       </View>
     ) : (
@@ -42,14 +45,14 @@ const getWeekItem = (
   })
 }
 
-const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
+const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange, dayList}) => {
   const [ymDate, setYmDate] = useState(date);
 
   const [curDate, setCurDate] = useState(new Date());
 
   const calendarData = getCalendarData(ymDate);
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <View className="calendar-container">
@@ -84,7 +87,7 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
                 curDate,
                 getCurrentWeek(curDate, calendarData)!,
                 onChange,
-                setCurDate)}
+                setCurDate,dayList)}
             </View>
           ) : calendarData.map((weekList, i) => (
             <View key={i} className="calendar-row">
@@ -93,7 +96,7 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
                 curDate,
                 weekList,
                 onChange,
-                setCurDate)}
+                setCurDate,dayList)}
             </View>
           ))}
 
@@ -101,7 +104,8 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange}) => {
             className={`calendar-expand-toggle ${expanded ? "coll" : ""}`}
             onClick={() => {
               setExpanded(!expanded)
-              onChange(new Date());
+
+              // onChange(new Date());
             }}
           >
             <IconFont name="expand" size={48} color="#5ea3ef"/>

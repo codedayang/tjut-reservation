@@ -1,11 +1,18 @@
-import Taro, {useReady} from "@tarojs/taro";
-import {Prop} from "../TimeLine";
+import Taro, {useReady, useDidShow, getCurrentInstance} from "@tarojs/taro";
 import {Canvas, View} from "@tarojs/components";
+import {Bar} from "../../service/api";
+
+type Prop = {
+  startHour: number;
+  endHour: number;
+  bar: Bar[]
+};
 
 const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
 
-
-  useReady(() => {
+  useDidShow(() => {
+    // const ctx = Taro.createCanvasContext("cvs", this);
+    console.log(123);
     Taro.createSelectorQuery().select("#cvs").fields(
       {
         node: true,
@@ -13,8 +20,10 @@ const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
       }
     ).exec((res) => {
       const c = res[0].node;
-      const ctx = c.getContext("2d");
+      // const ctx = c.getContext("2d");
 
+      const ctx = Taro.createCanvasContext("cvs", getCurrentInstance().page!!);
+      console.log("1234")
       const dpr = Taro.getSystemInfoSync().pixelRatio;
       c.width = res[0].width * dpr;
       c.height = res[0].height * dpr;
@@ -33,7 +42,7 @@ const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
       // const endTextWidth = ctx.measureText(endHour.toString()).width;
 
       const textBlockCount = endHour - startHour + 1;
-      const perTextBlockWidth = (canvasWidth ) / textBlockCount;
+      const perTextBlockWidth = (canvasWidth) / textBlockCount;
 
       const hourList: string[] = [];
       for (let i = startHour; i <= endHour; i++) {
@@ -75,18 +84,18 @@ const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
 
       // 以百分比绘制阴影部分
 
-      const bar = [
-        {
-          start: 0,
-          end: 10
-        },
-        {
-          start: 83.33,
-          end: 100
-        },
-      ];
+      // const bar = [
+      //   {
+      //     start: 0,
+      //     end: 10
+      //   },
+      //   {
+      //     start: 83.33,
+      //     end: 100
+      //   },
+      // ];
 
-      bar.forEach(item => {
+      props.bar.forEach(item => {
         const curBarStartX = fullBarStartX + fullBarWidth * item.start * 0.01;
         const curBarStartY = fontSize + 4;
 
@@ -101,15 +110,15 @@ const TimeLineCanvas: Taro.FunctionComponent<Prop> = (props) => {
       // ctx.strokeRect(0, 0, 220, 200);
       // const {width} = ctx.measureText("01234567");
       // ctx.strokeRect(0, 182, width, 18)
-
+      //
       // console.log(ctx.measureText("01234567"));
     });
-  })
+  });
 
 
   return (
     <View>
-      <Canvas id="cvs" style="width: 100%; height: 24px;" type="2d"/>
+      <Canvas canvasId="cvs" id="cvs" style="width: 100%; height: 24px;" type="2d"/>
     </View>
   );
 

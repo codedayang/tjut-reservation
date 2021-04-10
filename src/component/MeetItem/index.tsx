@@ -2,8 +2,9 @@ import Taro from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import './index.less'
 import IconFont from "../iconfont";
+import {MyMeetInfo} from "../../service/api";
 
-type Prop = MyReservationItem;
+type Prop = MyMeetInfo;
 const MeetItem: Taro.FunctionComponent<Prop> =
   ({
      id,
@@ -27,7 +28,7 @@ const MeetItem: Taro.FunctionComponent<Prop> =
         statusClassname += "ended";
     }
     return (
-      <View className="container" key={id}>
+      <View className="meet-item-container" key={id}>
         <View className="title-line">
           <View className="title">
             {name}

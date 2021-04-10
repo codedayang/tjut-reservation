@@ -1,6 +1,6 @@
 import {View} from '@tarojs/components'
 import './index.less'
-import Taro from '@tarojs/taro'
+import Taro, {useDidShow} from '@tarojs/taro'
 import Calendar from "../../component/Calendar";
 import {useState} from "react";
 import TimeLine from "../../component/TimeLine";
@@ -9,49 +9,71 @@ import MeetItem from "../../component/MeetItem";
 import TimeLineCanvas from "../../component/TimeLineCanvas";
 import MonthBar from "../../component/MonthBar";
 import MeetInfo from "../../component/MeetInfo";
+import {Day, getRevs, MeetingRoom} from "../../service/api";
+import TimeLineF from "../../component/TimeLineF";
 
 const MeetList: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
+  const [monthData, setMonthData] = useState<Day[]>([]);
+  const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
-  const meetItemMock: MyReservationItem = {
-    "id" : 1,
-    "name" : "Name",
-    "creator" : "创建者",
-    "meetingName" : "会议室名称",
-    "date" : "明天",
-    "time" : "15:00 - 16:00",
-    "status": "未开始"
+  useDidShow(async () => {
+    await load()
+  })
+
+  const load = async () => {
+    Taro.showLoading();
+    const res = await getRevs({
+      year: date.getFullYear().toString(),
+      month: (date.getMonth() + 1).toString()
+    })
+    setMonthData(res.data.day);
+    setRoomData(res.data.meetingRoom);
+    setDate(new Date());
+    console.log(res.data.day)
+    Taro.hideLoading();
+
+  }
+  const handleCalendarChange = async (cdate: Date) => {
+    let reload = false;
+    if (cdate.getMonth() != date.getMonth()) {
+      reload = true;
+    }
+    setDate(cdate);
+    if (reload) {
+      await load();
+    }
   }
 
+  const today = monthData.find(it => parseInt(it.dayOfMonth) == date.getDate());
+  console.log(today)
   return (
-    <View className='index' style={{background: "#f0f0f0"}}>
-      {/*<Calendar date={date} onChange={(date: Date) => {*/}
-      {/*  setDate(date);*/}
-      {/*}}/>*/}
+    <View className='meet-list-container' style={{background: "#f0f0f0"}}>
+      <Calendar
+        date={date}
+        onChange={handleCalendarChange}
+        dayList={monthData}
+      />
 
-      {/*<TimeLineCanvas*/}
-      {/*  startHour={8}*/}
-      {/*  endHour={23}*/}
-      {/*  barList={[*/}
-      {/*    {from: 15, to: 16}*/}
-      {/*  ]}/>*/}
-      {/*<RoomItem*/}
-      {/*  name={"108"}*/}
-      {/*  desc={"108会议室"}*/}
-      {/*  imgUrl={""}*/}
-      {/*  timeBar={[{from: 8, to: 18}]}/>*/}
-
-      {/*<MeetItem*/}
-
-      {/*  {...meetItemMock}/>*/}
+      <View className="room-list">
+        {today?.meetingRoomInfo.map(item => {
+          return (
+            <View className="room-list-item" onClick={() => {
+              Taro.navigateTo({
+                url: `../RoomDetail/index?roomid=${item.roomid}&curDay=${today.dayOfMonth}`
+              })
+            }}>
+              <RoomItem
+                {...roomData.find(it => it.roomid == item.roomid)!!}
+                bar={item.bar}/>
+            </View>
 
 
-      <MeetInfo {...meetItemMock} />
-      {/*<MonthBar*/}
-      {/*  months={[0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0]}*/}
-      {/*  curDate={new Date()}*/}
-      {/*  onSwitchMonth={(toYear, toMonth) => console.log(toYear, toMonth)}*/}
-      {/*/>*/}
+          )
+        })}
+      </View>
+
+
     </View>
 
 

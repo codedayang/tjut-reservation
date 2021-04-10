@@ -2,9 +2,10 @@ import { useGlobalIconFont } from './component/iconfont/helper';
 
 export default {
   pages: [
-    'pages/UserAuth/index',
-    'pages/MyMeet/index',
     'pages/MeetList/index',
+    'pages/RoomDetail/index',
+    'pages/MyMeet/index',
+    'pages/UserAuth/index',
     'pages/MeetForm/index',
     'pages/Setting/index',
     'pages/index/index'

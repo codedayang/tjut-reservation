@@ -2,15 +2,12 @@ import Taro from "@tarojs/taro";
 import {Text, View} from "@tarojs/components";
 import "./index.less";
 import {lineItem} from "./util";
+import {Bar} from "../../service/api";
 
-export type BarItem = {
-  from: number;
-  to: number;
-};
 export type Prop = {
   startHour: number;
   endHour: number;
-  barList: BarItem[];
+  barList: Bar[];
 };
 const TimeLine: Taro.FunctionComponent<Prop> = (props) => {
   return (

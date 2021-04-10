@@ -1,7 +1,6 @@
 import Taro, {useDidShow} from "@tarojs/taro";
 import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
-import {login} from "../../service/api";
 type Props = {
 
 }
