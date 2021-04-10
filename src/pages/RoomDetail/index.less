@@ -5,15 +5,53 @@
   //padding: 0 24px 0 24px;
   background: #f2f2f2;
   height: 100vh;
+
+  .top-line{
+    height: 2px;
+    width: 100vw;
+    background-color: rgba(136,136,136,0.2);
+  }
   .room-detail-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 24px;
+    padding: 15px 30px 10px 25px;
+
     background: #FFFFFF;
+
     .header-left {
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
+      > View{
+        margin-bottom: 10px;
+      }
+      .title{
+        font-weight: bold;
+        font-size: 45px;
+        margin-left: 10px;
+      }
+
+      .time{
+        display: flex;
+        font-weight: normal;
+        justify-content: flex-start;
+        >IconFont{
+          margin-top: 7px;
+          margin-left: 5px;
+        }
+        >View{
+          margin-left: 13px;
+          font-size: 28px;
+          color: rgba(0,0,0,0.5);
+        }
+      }
+
+      .remark{
+        font-weight: normal;
+        font-size: 28px;
+        color: rgba(0,0,0,0.5);
+      }
 
     }
 
@@ -22,13 +60,33 @@
         background: #23a9f4;
         border-radius: 10%;
         color: #FFFFFF;
-        padding: 18px 26px 18px 26px;
-        font-size: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+        height: 68px;
+        width: 116px;
+        margin-top: 20px;
+        margin-right: 20px;
+        > Text{
+          font-weight: normal;
+          font-size: 33px;
+        }
       }
     }
 
 
+  }
+
+  .center-line{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .line{
+      height: 2px;
+      width: 90vw;
+      background-color: rgba(136,136,136,0.2);
+    }
   }
 
   .time-line {
