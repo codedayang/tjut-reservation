@@ -128,9 +128,17 @@ const RoomDetail: Taro.FunctionComponent = () => {
                   //   console.log(res);
                   // })
                 }}>
-                <View>{info.name}</View>
-                <View>{info.creator}</View>
-                <View>{info.date} {info.time}</View>
+                <View className="blue-left-border">
+                  <View className="name">{info.name}</View>
+                  <View className="creator">
+                    <IconFont name="creator" size={30} color={"rgba(68,68,68,0.7)"}/>
+                    <View>{info.creator}</View>
+                  </View>
+                  <View className="date-time">
+                    <IconFont name="date" size={30} color={"rgba(68,68,68,0.7)"}/>
+                    <View>{info.date} {info.time}</View>
+                  </View>
+                </View>
               </View>
             );
           })

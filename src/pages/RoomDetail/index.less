@@ -96,11 +96,57 @@
   }
 
   .meet-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
     .meet-item-container {
-      background: #FFFFFF;
-      margin: 16px;
-      padding: 24px;
+      width: 90vw;
+      height: 200px;
+      margin-top: 20px;
+      background: #A5D3FD;
+      border-radius: 15px;
       cursor: pointer;
+      .blue-left-border{
+        width: 89vw;
+        height: 200px;
+        margin-left: 1vw;
+        background: #FFFFFF;
+        border-radius: 15px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        > View{
+          margin-top: 15px;
+          margin-left: 20px;
+        }
+        .name{
+          font-weight: bold;
+          margin-left: 25px;
+          font-size: 40px;
+        }
+        .creator{
+          display: flex;
+          >IconFont{
+            margin-top: 6px;
+          }
+          >View{
+            margin-left: 20px;
+            color: rgba(68,68,68,0.7);
+          }
+        }
+        .date-time{
+          display: flex;
+          >IconFont{
+            margin-top: 6px;
+          }
+          >View{
+            margin-left: 20px;
+            color: rgba(68,68,68,0.7);
+          }
+        }
+      }
     }
   }
 }
