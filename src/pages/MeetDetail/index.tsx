@@ -1,8 +1,9 @@
 import Taro, {useRouter, useDidShow, getCurrentPages} from "@tarojs/taro";
-import {Image, View} from "@tarojs/components";
+import {Image, Text, View} from "@tarojs/components";
 import {getRev, GetRevRes} from "../../service/api";
 import {useState} from "react";
 import MeetInfo from "../../component/MeetInfo";
+import "./index.less"
 
 const MeetDetail: Taro.FunctionComponent = () => {
 
@@ -40,24 +41,28 @@ const MeetDetail: Taro.FunctionComponent = () => {
 
   return (
     <View className="meet-detail-container">
-      <MeetInfo
-        {...data?.data!}
-        status="未开始"
-      />
-
-      <View>
-        <View>会议内容</View>
-        <View>{data?.data.content}</View>
+      <View className="meet-info">
+        <MeetInfo
+          {...data?.data!}
+        />
       </View>
 
-      <View>
-        <View>参会人员</View>
-        <View>
+
+      <View className="meet-content">
+        <View className="content-title">会议内容</View>
+        <View className="divider"/>
+        <View className="content-text">{data?.data.content}</View>
+      </View>
+
+      <View className="meet-ptc">
+        <View className="ptc-title">参会人员 ({data?.data.participant.length})</View>
+        {/*<View className="divider"/>*/}
+        <View className="ptc-list">
           {data?.data.participant.map(p => {
             return (
-              <View>
-                <Image src={p.avatarUrl}/>
-                <View>{p.nickName}</View>
+              <View className="list-item">
+                <Image src={p.avatarUrl} className="avatar"/>
+                <View className="nickName">{p.nickName}</View>
               </View>
             );
           })}

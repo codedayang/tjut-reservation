@@ -6,8 +6,10 @@ import {MyMeetInfo} from "../../service/api";
 
 const rightItem = (icon: IconNames, tip: string) => {
   return (
-    <View className="meet-info-right-item">
-      <IconFont name={icon} />
+    <View
+      className="meet-info-right-item"
+      onClick={() => console.log("ok")}>
+      <IconFont name={icon} size={42}/>
       <View className="right-item-text">{tip}</View>
     </View>
   )

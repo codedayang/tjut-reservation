@@ -54,8 +54,18 @@ const rspInterceptor = (chain) => {
     } else if (res.data.code == "A0400") {
       return Promise.reject('请求出错');
     } else if (res.data.code != "00000") {
+      Taro.hideLoading();
+      Taro.showToast({
+        title: "请求失败: " + res.message,
+        icon: "none"
+      })
       return Promise.reject('请求出错');
     } else {
+      // Taro.hideLoading();
+      // Taro.showToast({
+      //   title: "请求失败: " + res.message,
+      //   icon: "none"
+      // })
       return res.data;
     }
   });

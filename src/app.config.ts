@@ -9,7 +9,6 @@ export default {
     'pages/UserAuth/index',
     'pages/MeetDetail/index',
     'pages/Setting/index',
-    'pages/index/index'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -32,14 +31,14 @@ export default {
         "selectedIconPath": "images/MeetListSelected.png",
         "iconPath": "images/MeetList.png",
         "pagePath": "pages/MeetList/index",
-        "text": "日程安排"
+        "text": "会议预约"
       },
-      {
-        "selectedIconPath": "images/SettingSelected.png",
-        "iconPath": "images/Setting.png",
-        "pagePath": "pages/Setting/index",
-        "text": "设置"
-      },
+      // {
+      //   "selectedIconPath": "images/SettingSelected.png",
+      //   "iconPath": "images/Setting.png",
+      //   "pagePath": "pages/Setting/index",
+      //   "text": "设置"
+      // },
     ]
   }
 }

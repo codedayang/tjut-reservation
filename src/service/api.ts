@@ -133,6 +133,7 @@ export type GetRevRes = BaseRes<{
   date : string,
   time : string,
   content : string,
+  status: "未开始" | "进行中" | "已结束",
   participant: MeetParticipant[]
 }>
 

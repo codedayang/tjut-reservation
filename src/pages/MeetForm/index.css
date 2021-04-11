@@ -11,6 +11,16 @@
 .container .meet-form .form-item .form-item-right {
   flex-basis: 60%;
 }
+.container .meet-form .form-item .time-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .meet-form .form-item .time-input-container .time-input-hint {
+  font-size: 24px;
+  padding: 16px;
+  background: #a6a9ae;
+}
 .container .meet-form .divider {
   height: 4px;
   width: 100%;
