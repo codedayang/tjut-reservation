@@ -4,4 +4,56 @@
   background: #f2f2f2;
   height: 100vh;
 }
+.meet-detail-container .meet-info {
+  margin: 10px 0 4px 0;
+}
+.meet-detail-container .meet-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background: #FFFFFF;
+  padding: 26px;
+}
+.meet-detail-container .meet-content .content-title {
+  font-size: 42px;
+}
+.meet-detail-container .meet-content .content-text {
+  font-size: 30px;
+}
+.meet-detail-container .meet-ptc {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background: #FFFFFF;
+  padding: 16px;
+  margin: 22px;
+  border-radius: 10px;
+}
+.meet-detail-container .meet-ptc .ptc-title {
+  font-size: 36px;
+}
+.meet-detail-container .meet-ptc .ptc-list {
+  display: flex;
+  flex-direction: row;
+  margin: 16px;
+}
+.meet-detail-container .meet-ptc .ptc-list .list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.meet-detail-container .meet-ptc .ptc-list .list-item .avatar {
+  height: 84px;
+  width: 84px;
+  border-radius: 100%;
+}
+.meet-detail-container .meet-ptc .ptc-list .list-item .nickName {
+  font-size: 24px;
+}
+.divider {
+  height: 2px;
+  width: 100%;
+  background: rgba(196, 196, 196, 0.3);
+  margin: 14px 10px 14px 10px;
+}
 /*# sourceMappingURL=index.css.map */

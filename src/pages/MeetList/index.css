@@ -1,12 +1,17 @@
 .meet-list-container {
   height: 100vh;
 }
+.meet-list-container .top-line {
+  height: 2px;
+  width: 100vw;
+  background-color: rgba(136, 136, 136, 0.2);
+}
 .meet-list-container .room-list {
   display: flex;
   flex-direction: column;
   margin: 28px;
 }
 .meet-list-container .room-list .room-list-item {
-  margin-top: 16px;
+  margin-bottom: 26px;
 }
 /*# sourceMappingURL=index.css.map */

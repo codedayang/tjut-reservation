@@ -1,5 +1,6 @@
-@left-font-size: 28px;
-@right-font-size: 20px;
+@left-font-size: 36px;
+@left-font-color: rgba(0, 0, 0, 0.7);
+@right-font-size: 28px;
 
 .meet-info-container {
   display: flex;
@@ -9,8 +10,12 @@
   background: rgba(255, 255, 255, 1);
   padding: 11px 14px 12px 24px;
   .left {
+    flex: 7;
     display: flex;
     flex-direction: column;
+    .name {
+      font-size: 48px;
+    }
     .creator {
       display: flex;
       flex-direction: row;
@@ -18,6 +23,7 @@
       margin-top: 10px;
       .creator-text {
         font-size: @left-font-size;
+        color: @left-font-color;
         margin-inline-start: 12px;
       }
     }
@@ -28,6 +34,7 @@
       margin-top: 10px;
       .meeting-name-text {
         font-size: @left-font-size;
+        color: @left-font-color;
         margin-inline-start: 12px;
       }
     }
@@ -36,23 +43,28 @@
       flex-direction: row;
       align-items: center;
       margin-top: 10px;
+      flex-wrap: wrap;
       .date {
         font-size: @left-font-size;
+        color: @left-font-color;
         margin-inline-start: 12px;
       }
       .time {
         font-size: @left-font-size;
+        color: @left-font-color;
         margin-inline-start: 12px;
       }
       .status {
 
         font-size: @left-font-size;
+        color: @left-font-color;
         margin-inline-start: 12px;
       }
     }
 
   }
   .right {
+    flex: 4;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -74,13 +86,13 @@
   }
 
 }
-
 .meet-info-right-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 18px;
+  //padding: 18px;
+
   cursor: pointer;
   .right-item-text {
     font-size: @right-font-size;

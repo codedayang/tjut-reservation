@@ -4,33 +4,132 @@
   background: #f2f2f2;
   height: 100vh;
 }
+.room-detail-container .top-line {
+  height: 2px;
+  width: 100vw;
+  background-color: rgba(136, 136, 136, 0.2);
+}
 .room-detail-container .room-detail-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 24px;
+  padding: 15px 30px 10px 25px;
   background: #FFFFFF;
 }
 .room-detail-container .room-detail-header .header-left {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+.room-detail-container .room-detail-header .header-left > View {
+  margin-bottom: 10px;
+}
+.room-detail-container .room-detail-header .header-left .title {
+  font-weight: bold;
+  font-size: 45px;
+  margin-left: 10px;
+}
+.room-detail-container .room-detail-header .header-left .time {
+  display: flex;
+  font-weight: normal;
+  justify-content: flex-start;
+}
+.room-detail-container .room-detail-header .header-left .time > IconFont {
+  margin-top: 7px;
+  margin-left: 5px;
+}
+.room-detail-container .room-detail-header .header-left .time > View {
+  margin-left: 13px;
+  font-size: 28px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.room-detail-container .room-detail-header .header-left .remark {
+  font-weight: normal;
+  font-size: 28px;
+  color: rgba(0, 0, 0, 0.5);
 }
 .room-detail-container .room-detail-header .header-right .rev-btn {
   background: #23a9f4;
   border-radius: 10%;
   color: #FFFFFF;
-  padding: 18px 26px 18px 26px;
-  font-size: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  height: 68px;
+  width: 116px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.room-detail-container .room-detail-header .header-right .rev-btn > Text {
+  font-weight: normal;
+  font-size: 33px;
+}
+.room-detail-container .center-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.room-detail-container .center-line .line {
+  height: 2px;
+  width: 90vw;
+  background-color: rgba(136, 136, 136, 0.2);
 }
 .room-detail-container .time-line {
   background: #FFFFFF;
   padding: 4% 2.5% 4% 2.5%;
 }
+.room-detail-container .meet-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
 .room-detail-container .meet-list .meet-item-container {
-  background: #FFFFFF;
-  margin: 16px;
-  padding: 24px;
+  width: 90vw;
+  height: 200px;
+  margin-top: 20px;
+  background: #A5D3FD;
+  border-radius: 15px;
   cursor: pointer;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border {
+  width: 89vw;
+  height: 200px;
+  margin-left: 1vw;
+  background: #FFFFFF;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border > View {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .name {
+  font-weight: bold;
+  margin-left: 25px;
+  font-size: 40px;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .creator {
+  display: flex;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .creator > IconFont {
+  margin-top: 6px;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .creator > View {
+  margin-left: 20px;
+  color: rgba(68, 68, 68, 0.7);
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .date-time {
+  display: flex;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .date-time > IconFont {
+  margin-top: 6px;
+}
+.room-detail-container .meet-list .meet-item-container .blue-left-border .date-time > View {
+  margin-left: 20px;
+  color: rgba(68, 68, 68, 0.7);
 }
 /*# sourceMappingURL=index.css.map */
