@@ -9,8 +9,8 @@ import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MyMeet: Taro.FunctionComponent = () => {
   useDidShow(async () => {
-    await loginAndTokenOrRedirect();
     Taro.showLoading();
+    await loginAndTokenOrRedirect();
     const res = await getMyRev({
       month: (date.getMonth() + 1).toString(),
       year: (date.getFullYear()).toString()

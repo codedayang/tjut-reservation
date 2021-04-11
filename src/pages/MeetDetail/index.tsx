@@ -11,8 +11,8 @@ const MeetDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
   const meetId = params.meetid;
   useDidShow(async () => {
-    await loginAndTokenOrRedirect();
     Taro.showLoading();
+    await loginAndTokenOrRedirect();
     const res = await getRev({
       id: parseInt(meetId!)
     })

@@ -24,7 +24,7 @@ export const loginAndTokenOrRedirect = async () => {
 const rspInterceptor = async (chain) => {
   const requestParams = chain.requestParams;
   const res = await chain.proceed(requestParams);
-  return res;
+  // return res;
   // if ((res.data.code == "A0400" && requestParams.data.token == "") || res.data.code == "A0220") {
   //   if (!onr) {
   //     onr = true;

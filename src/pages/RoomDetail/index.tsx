@@ -42,6 +42,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
 
 
   useDidShow(async () => {
+    Taro.showLoading();
     await loginAndTokenOrRedirect();
     await load()
   })

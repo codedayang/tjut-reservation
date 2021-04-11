@@ -19,6 +19,7 @@ const MeetList: Taro.FunctionComponent = () => {
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
   useDidShow(async () => {
+    Taro.showLoading();
     await loginAndTokenOrRedirect();
     await load()
   })

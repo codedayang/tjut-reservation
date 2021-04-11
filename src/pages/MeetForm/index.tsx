@@ -20,8 +20,8 @@ const MeetForm: Taro.FunctionComponent = () => {
 
   const {params} = useRouter();
   useDidShow(async () => {
-    await loginAndTokenOrRedirect();
     Taro.showLoading();
+    await loginAndTokenOrRedirect();
     const date = new Date();
     const res = await getRevs({
       year: (date.getFullYear()).toString(),
