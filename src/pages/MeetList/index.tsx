@@ -11,6 +11,7 @@ import MonthBar from "../../component/MonthBar";
 import MeetInfo from "../../component/MeetInfo";
 import {Day, getRevs, MeetingRoom} from "../../service/api";
 import TimeLineF from "../../component/TimeLineF";
+import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetList: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
@@ -18,6 +19,7 @@ const MeetList: Taro.FunctionComponent = () => {
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
   useDidShow(async () => {
+    await loginAndTokenOrRedirect();
     await load()
   })
 

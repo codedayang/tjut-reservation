@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro';
-import { baseUrl } from '../config';
+import {baseUrl} from '../config';
 import {login} from "./api";
 import * as url from "url";
 
@@ -11,64 +11,51 @@ export const loginAndTokenOrRedirect = async () => {
   const res = await login({code: code});
   Taro.setStorageSync("token", res.data.token);
   // return res.data.needAuth;
-    if (res.data.needAuth) {
-      await Taro.navigateTo({
-        url: "../UserAuth/index"
-      });
-      return true;
-    }
+  if (res.data.needAuth) {
+    await Taro.navigateTo({
+      url: "../UserAuth/index"
+    });
+    return true;
+  }
 
   return false;
 }
 
-const rspInterceptor = (chain) => {
+const rspInterceptor = async (chain) => {
   const requestParams = chain.requestParams;
-  return chain.proceed(requestParams).then((res) => {
-    // console.log(requestParams);
-    // if (res.data.code != "A0220") {
-    if ((res.data.code == "A0400" && res.data.message.includes("token")) || res.data.code == "A0220") {
-      if (!onr) {
-        onr = true;
-        loginAndTokenOrRedirect().then((stop) => {
-          onr = false;
-          if (stop) {
-            // console.log("stop")
-            return;
-          }
-          console.log(url)
-          if (requestParams.url.includes("login")) {
-            // console.log("skipped")
-            return;
-          }
-
-          return Taro.request(requestParams).then(r => {
-            requestParams.success = null;
-            // console.log(requestParams)
-            // onr = false;
-            // return r;
-          });
-
-        });
-      }
-
-    } else if (res.data.code == "A0400") {
-      return Promise.reject('请求出错');
-    } else if (res.data.code != "00000") {
-      Taro.hideLoading();
-      Taro.showToast({
-        title: "请求失败: " + res.message,
-        icon: "none"
-      })
-      return Promise.reject('请求出错');
-    } else {
-      // Taro.hideLoading();
-      // Taro.showToast({
-      //   title: "请求失败: " + res.message,
-      //   icon: "none"
-      // })
-      return res.data;
-    }
-  });
+  const res = await chain.proceed(requestParams);
+  return res;
+  // if ((res.data.code == "A0400" && requestParams.data.token == "") || res.data.code == "A0220") {
+  //   if (!onr) {
+  //     onr = true;
+  //     const stop = await loginAndTokenOrRedirect();
+  //     onr = false;
+  //     if (stop) {
+  //       return;
+  //     }
+  //     if (requestParams.url.includes("login")) {
+  //       return;
+  //     }
+  //     const p = requestParams;
+  //     p.data = {
+  //       ...p.data,
+  //       token: Taro.getStorageSync('token')
+  //     };
+  //     const resn = await Taro.request(p)
+  //     return resn.data;
+  //   }
+  if (res.data.code == "A0400") {
+    return Promise.reject('请求出错');
+  } else if (res.data.code != "00000") {
+    Taro.hideLoading();
+    Taro.showToast({
+      title: "请求失败: " + res.message,
+      icon: "none"
+    })
+    return Promise.reject('请求出错');
+  } else {
+    return res.data;
+  }
 }
 
 Taro.addInterceptor(rspInterceptor);
@@ -78,7 +65,8 @@ interface OptionsType<T> {
   data: T;
   url: string;
 }
-export default <REQ, RES> (options: OptionsType<REQ>) => {
+
+export default <REQ, RES>(options: OptionsType<REQ>) => {
 
   return new Promise<RES>(((resolve, _) => {
     Taro.request<RES, REQ>({

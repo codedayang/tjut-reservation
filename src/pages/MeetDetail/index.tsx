@@ -4,12 +4,14 @@ import {getRev, GetRevRes} from "../../service/api";
 import {useState} from "react";
 import MeetInfo from "../../component/MeetInfo";
 import "./index.less"
+import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetDetail: Taro.FunctionComponent = () => {
 
   const {params} = useRouter();
   const meetId = params.meetid;
   useDidShow(async () => {
+    await loginAndTokenOrRedirect();
     Taro.showLoading();
     const res = await getRev({
       id: parseInt(meetId!)
