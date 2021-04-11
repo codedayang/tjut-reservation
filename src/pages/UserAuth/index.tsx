@@ -1,8 +1,9 @@
-import {Button, Input, View} from '@tarojs/components'
+import {Button, Image, Input, View} from '@tarojs/components'
 import './index.less'
 import Taro, {useDidShow} from '@tarojs/taro'
 import {loginAuth} from "../../service/api";
 import {useState} from "react";
+import logoPng from '../../images/logo.png'
 
 const UserAuth: Taro.FunctionComponent = () => {
   const [name, setName] = useState("");
@@ -43,10 +44,21 @@ const UserAuth: Taro.FunctionComponent = () => {
     Taro.hideLoading();
   };
   return (
-    <View className='container' style={{background: "#f0f0f0"}}>
+    <View className='auth-container'>
+
+
+      <Image
+        src={logoPng}
+        mode="scaleToFill"
+        className="logo"/>
       <View className="login-hint">
-        欢迎使用SCSE会议室预约小程序
+        欢迎使用
       </View>
+      <View className="login-hint">
+        SCSE会议室预约小程序
+      </View>
+
+      <View className="divider"/>
 
       <View>
         请输入您的姓名
