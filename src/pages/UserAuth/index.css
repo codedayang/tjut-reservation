@@ -1,19 +1,37 @@
-.container {
-  padding: 30px;
+.auth-container {
   height: 100vh;
+  background: #FFFFFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  padding: 68px;
 }
-.container .login-hint {
+.auth-container .logo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 4px solid #e0e0e0;
+  margin-top: -150px;
+}
+.auth-container .login-hint {
   font-size: 48px;
+  margin: 8px;
 }
-.container .name-input {
+.auth-container .name-input {
   background: #FFF;
-  border: 4px solid #000;
+  height: 68px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 8px;
+  border: 4px solid #e0e0e0;
 }
-.container .login-button {
+.auth-container .login-button {
   margin: 16px;
+}
+.divider {
+  height: 2px;
+  width: 100%;
+  background: rgba(196, 196, 196, 0.3);
+  margin: 14px 10px 14px 10px;
 }
 /*# sourceMappingURL=index.css.map */
