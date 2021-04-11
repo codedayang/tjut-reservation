@@ -4,15 +4,33 @@
   //padding: 0 24px 0 24px;
   background: #f2f2f2;
   height: 100vh;
-
+  .top-line{
+    height: 2px;
+    width: 100vw;
+    background-color: rgba(136,136,136,0.2);
+  }
   .header {
+    padding-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     background: #ffffff;
-    padding-bottom: 24px;
+    padding-bottom: 20px;
+    >Button{
+      background-color: #23a9f4;
+      color: #FFFFFF;
+      padding: 2px 20px 2px 20px;
+      >Text{
+        font-size: 33px;
+      }
+    }
+    .title{
+      font-size: 42px;
+      font-weight: normal;
+      margin-top: 20px;
+    }
   }
 
   .divider {
