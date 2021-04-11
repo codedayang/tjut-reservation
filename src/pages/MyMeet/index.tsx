@@ -1,5 +1,5 @@
 import Taro, {useDidShow} from "@tarojs/taro";
-import {Button, View} from "@tarojs/components";
+import {Button, Text, View} from "@tarojs/components";
 import './index.less'
 import MonthBar from "../../component/MonthBar";
 import {useState} from "react";
@@ -36,8 +36,9 @@ const MyMeet: Taro.FunctionComponent = () => {
 
   return (
     <View className="mymeet-container">
+      <View className="top-line"/>
       <View className="header">
-        <View>我的会议安排</View>
+        <View className="title">我的会议安排</View>
         <Button
           size={"mini"}
           style={{margin: "0"}}
@@ -45,9 +46,9 @@ const MyMeet: Taro.FunctionComponent = () => {
             Taro.navigateTo({
               url: `../MeetForm/index`
             })
-          }}>预约会议室</Button>
+          }}><Text>预约会议室</Text></Button>
       </View>
-      <View className="divider"/>
+
       <MonthBar months={month} curDate={date} onSwitchMonth={handleSwitchMonth}/>
       <View className="meet-list">
         {info.map(item => {
