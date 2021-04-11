@@ -1,6 +1,6 @@
 import HandleBar from "./HandleBar";
 import {Dispatch, SetStateAction, useState} from "react";
-import Taro from "@tarojs/taro"
+import Taro, {useDidShow, useReady} from "@tarojs/taro"
 import {View, Text} from "@tarojs/components";
 import './index.less'
 import {getCalendarData, getCurrentWeek} from "./utils";
@@ -50,7 +50,17 @@ const getWeekItem = (
 const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange, dayList}) => {
   const [ymDate, setYmDate] = useState(date);
 
-  const [curDate, setCurDate] = useState(new Date());
+  const [curDate, setCurDate] = useState(date);
+  // console.log(curDate);
+
+  useReady(() => {
+    setCurDate(date);
+    onChange(date);
+    console.log(date);
+  })
+  useDidShow(() => {
+
+  })
 
   const calendarData = getCalendarData(ymDate);
 
