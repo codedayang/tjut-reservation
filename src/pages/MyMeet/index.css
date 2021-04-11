@@ -4,14 +4,33 @@
   background: #f2f2f2;
   height: 100vh;
 }
+.mymeet-container .top-line {
+  height: 2px;
+  width: 100vw;
+  background-color: rgba(136, 136, 136, 0.2);
+}
 .mymeet-container .header {
+  padding-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
   background: #ffffff;
-  padding-bottom: 24px;
+  padding-bottom: 20px;
+}
+.mymeet-container .header > Button {
+  background-color: #23a9f4;
+  color: #FFFFFF;
+  padding: 2px 20px 2px 20px;
+}
+.mymeet-container .header > Button > Text {
+  font-size: 33px;
+}
+.mymeet-container .header .title {
+  font-size: 42px;
+  font-weight: normal;
+  margin-top: 20px;
 }
 .mymeet-container .divider {
   height: 4px;

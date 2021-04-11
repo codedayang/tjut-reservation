@@ -1,8 +1,10 @@
 .meet-item-container {
   background: #FFFFFF;
   padding: 20px 18px 20px 24px;
-  border-left: 4px solid #3186f6;
+  border-left: 8px solid #A5D3FD;
   border-radius: 14px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 .meet-item-container .title-line {
