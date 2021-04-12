@@ -6,12 +6,12 @@ import IconFont from "../../component/iconfont";
 import Calendar from "../../component/Calendar";
 import TimeLineF from "../../component/TimeLineF";
 import {useState} from "react";
+import {loginAndTokenOrRedirect} from "../../service/request";
 
 
 const RoomDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
-  const [date, setDate] = useState(
-    new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
+  const [date, setDate] = useState<Date>(new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
   const [monthData, setMonthData] = useState<Day[]>([]);
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
@@ -32,6 +32,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
       year: date.getFullYear().toString(),
       month: (date.getMonth() + 1).toString()
     })
+    setDate(new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)))
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
     console.log(res.data.day)
@@ -41,6 +42,8 @@ const RoomDetail: Taro.FunctionComponent = () => {
 
 
   useDidShow(async () => {
+    Taro.showLoading();
+    await loginAndTokenOrRedirect();
     await load()
   })
 

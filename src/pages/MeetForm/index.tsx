@@ -3,6 +3,7 @@ import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
 import {getRevs, MeetingRoom, postRev} from "../../service/api";
 import {useState} from "react";
+import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetForm: Taro.FunctionComponent = () => {
   const [roomList, setRoomList] = useState<MeetingRoom[]>([]);
@@ -20,6 +21,7 @@ const MeetForm: Taro.FunctionComponent = () => {
   const {params} = useRouter();
   useDidShow(async () => {
     Taro.showLoading();
+    await loginAndTokenOrRedirect();
     const date = new Date();
     const res = await getRevs({
       year: (date.getFullYear()).toString(),
