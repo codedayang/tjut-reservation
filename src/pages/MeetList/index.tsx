@@ -5,7 +5,6 @@ import Calendar from "../../component/Calendar";
 import {useState} from "react";
 import RoomItem from "../../component/RoomItem";
 import {Day, getRevs, MeetingRoom} from "../../service/api";
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetList: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
@@ -14,7 +13,7 @@ const MeetList: Taro.FunctionComponent = () => {
 
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
+    // await loginAndTokenOrRedirect();
     await load(new Date());
   })
 

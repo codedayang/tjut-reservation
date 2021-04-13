@@ -1,12 +1,17 @@
 import './app.less'
-import Taro, {useDidShow} from "@tarojs/taro";
+import Taro, {useDidShow, useReady} from "@tarojs/taro";
 import {loginAndTokenOrRedirect} from "./service/request";
 import {View} from "@tarojs/components";
 
 const App: Taro.FunctionComponent<any> = (props) => {
   useDidShow(async () => {
-    // await loginAndTokenOrRedirect();
+
   });
+  useReady(async () => {
+    Taro.showLoading();
+    await loginAndTokenOrRedirect();
+    Taro.hideLoading();
+  })
   return (
     <View className="app-root">
       {props.children}

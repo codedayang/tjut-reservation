@@ -6,7 +6,6 @@ import IconFont from "../../component/iconfont";
 import Calendar from "../../component/Calendar";
 import TimeLineF from "../../component/TimeLineF";
 import {useState} from "react";
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 
 const RoomDetail: Taro.FunctionComponent = () => {
@@ -41,7 +40,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
 
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
+    // await loginAndTokenOrRedirect();
     await load(initDate)
   })
 

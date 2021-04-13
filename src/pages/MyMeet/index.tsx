@@ -5,12 +5,11 @@ import MonthBar from "../../component/MonthBar";
 import {useState} from "react";
 import {getMyRev, MyMeetInfo} from "../../service/api";
 import MeetItem from "../../component/MeetItem";
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MyMeet: Taro.FunctionComponent = () => {
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
+    // await loginAndTokenOrRedirect();
     const res = await getMyRev({
       month: (date.getMonth() + 1).toString(),
       year: (date.getFullYear()).toString()
