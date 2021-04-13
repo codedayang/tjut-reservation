@@ -41,6 +41,10 @@
   border: 2px solid rgba(0, 162, 255, 0.5);
   background-color: rgba(0, 162, 255, 0.5);
 }
+.calendar-item .calendar-item-button.disabled {
+  color: #e0e0e0;
+  pointer-events: none;
+}
 .calendar-item .calendar-item-button-around {
   display: flex;
   flex-direction: column;

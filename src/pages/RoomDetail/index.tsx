@@ -12,6 +12,7 @@ import {loginAndTokenOrRedirect} from "../../service/request";
 const RoomDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
   const [date, setDate] = useState<Date>(new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
+  const initDate = new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!));
   const [monthData, setMonthData] = useState<Day[]>([]);
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
@@ -91,6 +92,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
       </View>
 
       <Calendar
+        initDate={initDate}
         date={date}
         onChange={handleCalendarChange}
         dayList={monthData}

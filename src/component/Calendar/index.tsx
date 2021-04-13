@@ -8,6 +8,7 @@ import IconFont from "../iconfont";
 import {Day} from "../../service/api";
 
 type Prop = {
+  initDate: Date,
   date: Date;
   onChange: (date: Date) => void;
   dayList: Day[]
@@ -15,6 +16,7 @@ type Prop = {
 };
 
 const getWeekItem = (
+  initDate: Date,
   ymDate: Date,
   today: Date,
   weekList: Array<number>,
@@ -28,8 +30,19 @@ const getWeekItem = (
     if (day == today.getDate() && ymDate.getMonth() == today.getMonth()) {
       cn += " today";
     }
+    // 仅可预约本周
+    // 将范围外的日期样式设为禁用
+    let disabled = false;
+    if (day > initDate.getDate() + 7
+      || day < initDate.getDate()
+      || ymDate.getMonth() > initDate.getMonth()
+      || ymDate.getMonth() < initDate.getMonth()) {
+      cn += " disabled"
+      disabled = true;
+    }
     return day !== -1 ? (
       <View key={j} className={`calendar-item`} onClick={() => {
+        if (disabled) return;
         setCurDate(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
         onChange(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
       }}>
@@ -47,7 +60,13 @@ const getWeekItem = (
   })
 }
 
-const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange, dayList}) => {
+const Calendar: Taro.FunctionComponent<Prop> = (
+  {
+    initDate,
+    date,
+    onChange,
+    dayList
+  }) => {
   const [ymDate, setYmDate] = useState(date);
 
   const [curDate, setCurDate] = useState(date);
@@ -95,6 +114,7 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange, dayList}) => {
           {expanded ? (
             <View className="calendar-row">
               {getWeekItem(
+                initDate,
                 ymDate,
                 curDate,
                 getCurrentWeek(curDate, calendarData)!,
@@ -104,6 +124,7 @@ const Calendar: Taro.FunctionComponent<Prop> = ({date, onChange, dayList}) => {
           ) : calendarData.map((weekList, i) => (
             <View key={i} className="calendar-row">
               {getWeekItem(
+                initDate,
                 ymDate,
                 curDate,
                 weekList,

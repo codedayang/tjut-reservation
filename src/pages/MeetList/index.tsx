@@ -32,7 +32,7 @@ const MeetList: Taro.FunctionComponent = () => {
     })
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
-    // setDate(new Date());
+    setDate(new Date());
     // console.log(res.data.day)
     Taro.hideLoading();
 
@@ -55,6 +55,7 @@ const MeetList: Taro.FunctionComponent = () => {
       <View className="top-line"/>
 
       <Calendar
+        initDate={new Date()}
         date={date}
         onChange={handleCalendarChange}
         dayList={monthData}
