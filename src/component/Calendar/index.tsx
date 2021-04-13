@@ -10,7 +10,7 @@ import {Day} from "../../service/api";
 type Prop = {
   initDate: Date,
   date: Date;
-  onChange: (date: Date) => void;
+  onChange: (date: Date, inMonth: boolean) => void;
   dayList: Day[]
 
 };
@@ -20,7 +20,7 @@ const getWeekItem = (
   ymDate: Date,
   today: Date,
   weekList: Array<number>,
-  onChange: (date: Date) => void,
+  onChange: (date: Date, inMonth: boolean) => void,
   setCurDate: Dispatch<SetStateAction<Date>>,
   dayList: Day[]
 ) => {
@@ -32,11 +32,10 @@ const getWeekItem = (
     }
     // 仅可预约本周
     // 将范围外的日期样式设为禁用
+    const bd = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() + 7);
+    const d = new Date(ymDate.getFullYear(), ymDate.getMonth(), day, 23, 59, 59);
     let disabled = false;
-    if (day > initDate.getDate() + 7
-      || day < initDate.getDate()
-      || ymDate.getMonth() > initDate.getMonth()
-      || ymDate.getMonth() < initDate.getMonth()) {
+    if (d > bd) {
       cn += " disabled"
       disabled = true;
     }
@@ -44,13 +43,15 @@ const getWeekItem = (
       <View key={j} className={`calendar-item`} onClick={() => {
         if (disabled) return;
         setCurDate(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
-        onChange(new Date(ymDate.getFullYear(), ymDate.getMonth(), day));
+        onChange(new Date(ymDate.getFullYear(), ymDate.getMonth(), day), true);
       }}>
         <View className="calendar-item-button-around">
           <View className={cn}>
             {day}
           </View>
-          <Text className="calendar-item-mark">{dayList.find(it => parseInt(it.dayOfMonth) == day)?.count}</Text>
+          <Text className="calendar-item-mark">
+            {dayList.find(it => parseInt(it.dayOfMonth) == day)?.count}
+          </Text>
         </View>
       </View>
     ) : (
@@ -74,7 +75,7 @@ const Calendar: Taro.FunctionComponent<Prop> = (
 
   useReady(() => {
     setCurDate(date);
-    onChange(date);
+    onChange(date, false);
     console.log(date);
   })
   useDidShow(() => {
@@ -98,6 +99,7 @@ const Calendar: Taro.FunctionComponent<Prop> = (
             return;
           }
           setYmDate(date);
+          onChange(date, false)
         }}
       />
 
