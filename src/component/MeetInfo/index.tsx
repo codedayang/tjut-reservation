@@ -26,6 +26,17 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
      status
    }) =>
 {
+  let statusClassname = "";
+  switch (status) {
+    case "未开始":
+      statusClassname += "stand";
+      break;
+    case "进行中":
+      statusClassname += "running";
+      break;
+    case "已结束":
+      statusClassname += "ended";
+  }
   return (
     <View className="meet-info-container" key={id}>
       <View className="left">
@@ -46,17 +57,22 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
         </View>
         <View className="third-line">
           <IconFont name="date"/>
-          <View className="date">
-            {date}
-          </View>
-          <View className="time">
-            {time}
-          </View>
-          <View className="status">
-            {status}
+          <View className="time-line">
+            <View className="date">
+              {date}
+            </View>
+            <View className="time-status">
+              <View className="time">
+                {time}
+              </View>
+              <View className={`status ${statusClassname}`}>
+                {status}
+              </View>
+            </View>
           </View>
         </View>
       </View>
+      <View className="row-line"/>
       <View className="right">
         <View className="row-1">
           {rightItem("ring", "开启提醒")}

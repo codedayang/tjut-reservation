@@ -232,7 +232,7 @@ const MeetForm: Taro.FunctionComponent = () => {
             }}/>
         </View>
         <View className="divider"/>
-        <Button formType={"submit"} type="primary" style={{margin: "16px"}}>创建</Button>
+        <Button formType={"submit"} type="primary" style={{margin: "16px",backgroundColor: "#23a9f4"}}>创建</Button>
 
       </Form>
     </View>
