@@ -28,7 +28,7 @@ const MyMeet: Taro.FunctionComponent = () => {
   const handleSwitchMonth = async (toYear: number, toMonth: number) => {
     Taro.showLoading();
     const res = await getMyRev({
-      month: (toMonth).toString(),
+      month: (toMonth+1).toString(),
       year: (toYear).toString()
     })
     setMonth(res.data.months);
