@@ -1,41 +1,38 @@
 import Taro, {useDidShow, useRouter} from "@tarojs/taro";
-import {Button, Text, View} from "@tarojs/components";
+import {Text, View} from "@tarojs/components";
 import './index.less'
 import {Day, getRevs, MeetingRoom} from "../../service/api";
 import IconFont from "../../component/iconfont";
 import Calendar from "../../component/Calendar";
 import TimeLineF from "../../component/TimeLineF";
 import {useState} from "react";
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 
 const RoomDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
   const [date, setDate] = useState<Date>(new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)));
+  const initDate = new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!));
   const [monthData, setMonthData] = useState<Day[]>([]);
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
-  const handleCalendarChange = async (cdate: Date) => {
-    let reload = false;
-    if (cdate.getMonth() != date.getMonth()) {
-      reload = true;
-    }
+  const handleCalendarChange = async (cdate: Date, inMonth: boolean) => {
+
     setDate(cdate);
-    if (reload) {
-      await load();
+    if (!inMonth) {
+      await load(cdate);
     }
   }
 
-  const load = async () => {
+  const load = async (ldate: Date) => {
     Taro.showLoading();
     const res = await getRevs({
-      year: date.getFullYear().toString(),
-      month: (date.getMonth() + 1).toString()
+      year: ldate.getFullYear().toString(),
+      month: (ldate.getMonth() + 1).toString()
     })
     setDate(new Date(parseInt(params.year!!), parseInt(params.month!!), parseInt(params.day!!)))
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
-    console.log(res.data.day)
+    // console.log(res.data.day)
     Taro.hideLoading();
 
   }
@@ -43,8 +40,8 @@ const RoomDetail: Taro.FunctionComponent = () => {
 
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
-    await load()
+    // await loginAndTokenOrRedirect();
+    await load(initDate)
   })
 
   const roomid = parseInt(params.roomid!!)
@@ -91,6 +88,7 @@ const RoomDetail: Taro.FunctionComponent = () => {
       </View>
 
       <Calendar
+        initDate={initDate}
         date={date}
         onChange={handleCalendarChange}
         dayList={monthData}

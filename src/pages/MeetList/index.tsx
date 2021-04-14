@@ -3,15 +3,8 @@ import './index.less'
 import Taro, {useDidShow} from '@tarojs/taro'
 import Calendar from "../../component/Calendar";
 import {useState} from "react";
-import TimeLine from "../../component/TimeLine";
 import RoomItem from "../../component/RoomItem";
-import MeetItem from "../../component/MeetItem";
-import TimeLineCanvas from "../../component/TimeLineCanvas";
-import MonthBar from "../../component/MonthBar";
-import MeetInfo from "../../component/MeetInfo";
 import {Day, getRevs, MeetingRoom} from "../../service/api";
-import TimeLineF from "../../component/TimeLineF";
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetList: Taro.FunctionComponent = () => {
   const [date, setDate] = useState(new Date());
@@ -20,31 +13,28 @@ const MeetList: Taro.FunctionComponent = () => {
 
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
-    await load()
+    // await loginAndTokenOrRedirect();
+    await load(new Date());
   })
 
-  const load = async () => {
+  const load = async (ldate: Date) => {
     Taro.showLoading();
     const res = await getRevs({
-      year: date.getFullYear().toString(),
-      month: (date.getMonth() + 1).toString()
+      year: ldate.getFullYear().toString(),
+      month: (ldate.getMonth() + 1).toString()
     })
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
-    // setDate(new Date());
+    setDate(new Date());
     // console.log(res.data.day)
     Taro.hideLoading();
 
   }
-  const handleCalendarChange = async (cdate: Date) => {
-    let reload = false;
-    if (cdate.getMonth() != date.getMonth()) {
-      reload = true;
-    }
+  const handleCalendarChange = async (cdate: Date, inMonth: boolean) => {
+    console.log(cdate);
     setDate(cdate);
-    if (reload) {
-      await load();
+    if (!inMonth) {
+      await load(cdate);
     }
   }
 
@@ -55,6 +45,7 @@ const MeetList: Taro.FunctionComponent = () => {
       <View className="top-line"/>
 
       <Calendar
+        initDate={new Date()}
         date={date}
         onChange={handleCalendarChange}
         dayList={monthData}

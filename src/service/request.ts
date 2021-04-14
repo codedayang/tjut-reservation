@@ -1,10 +1,6 @@
 import Taro from '@tarojs/taro';
 import {baseUrl} from '../config';
 import {login} from "./api";
-import * as url from "url";
-
-
-let onr = false;
 
 export const loginAndTokenOrRedirect = async () => {
   const {code} = await Taro.login();
@@ -24,26 +20,6 @@ export const loginAndTokenOrRedirect = async () => {
 const rspInterceptor = async (chain) => {
   const requestParams = chain.requestParams;
   const res = await chain.proceed(requestParams);
-  // return res;
-  // if ((res.data.code == "A0400" && requestParams.data.token == "") || res.data.code == "A0220") {
-  //   if (!onr) {
-  //     onr = true;
-  //     const stop = await loginAndTokenOrRedirect();
-  //     onr = false;
-  //     if (stop) {
-  //       return;
-  //     }
-  //     if (requestParams.url.includes("login")) {
-  //       return;
-  //     }
-  //     const p = requestParams;
-  //     p.data = {
-  //       ...p.data,
-  //       token: Taro.getStorageSync('token')
-  //     };
-  //     const resn = await Taro.request(p)
-  //     return resn.data;
-  //   }
   if (res.data.code == "A0400") {
     return Promise.reject('请求出错');
   } else if (res.data.code != "00000") {
@@ -66,8 +42,7 @@ interface OptionsType<T> {
   url: string;
 }
 
-export default <REQ, RES>(options: OptionsType<REQ>) => {
-
+const realRequest  = <REQ, RES> (options: OptionsType<REQ>) => {
   return new Promise<RES>(((resolve, _) => {
     Taro.request<RES, REQ>({
       url: baseUrl + options.url,
@@ -85,5 +60,13 @@ export default <REQ, RES>(options: OptionsType<REQ>) => {
       }
     });
   }));
+}
 
+export default async <REQ, RES>(options: OptionsType<REQ>) => {
+  const token = Taro.getStorageSync('token');
+  if (!options.url.includes("login") && (!token || token == "")) {
+    // console.log("1");
+    await loginAndTokenOrRedirect();
+  }
+  return await realRequest<REQ, RES>(options)
 };

@@ -1,10 +1,9 @@
-import Taro, {useRouter, useDidShow, getCurrentPages} from "@tarojs/taro";
-import {Image, Text, View} from "@tarojs/components";
+import Taro, {useRouter, useDidShow} from "@tarojs/taro";
+import {Image, View} from "@tarojs/components";
 import {getRev, GetRevRes} from "../../service/api";
 import {useState} from "react";
 import MeetInfo from "../../component/MeetInfo";
 import "./index.less"
-import {loginAndTokenOrRedirect} from "../../service/request";
 
 const MeetDetail: Taro.FunctionComponent = () => {
 
@@ -12,7 +11,7 @@ const MeetDetail: Taro.FunctionComponent = () => {
   const meetId = params.meetid;
   useDidShow(async () => {
     Taro.showLoading();
-    await loginAndTokenOrRedirect();
+    // await loginAndTokenOrRedirect();
     const res = await getRev({
       id: parseInt(meetId!)
     })
