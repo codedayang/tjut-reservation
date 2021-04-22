@@ -2,7 +2,10 @@ import Taro from '@tarojs/taro';
 import {baseUrl} from '../config';
 import {login} from "./api";
 
+let inLogin = false;
 export const loginAndTokenOrRedirect = async () => {
+  if (inLogin) return;
+  inLogin = true;
   const {code} = await Taro.login();
   const res = await login({code: code});
   Taro.setStorageSync("token", res.data.token);
@@ -11,18 +14,20 @@ export const loginAndTokenOrRedirect = async () => {
     await Taro.navigateTo({
       url: "../UserAuth/index"
     });
+    inLogin = false;
     return true;
   }
+  inLogin = false;
 
   return false;
-}
+};
 
 const rspInterceptor = async (chain) => {
   const requestParams = chain.requestParams;
   const res = await chain.proceed(requestParams);
   if (res.data.code == "A0400") {
     return Promise.reject('请求出错');
-  } else if (res.data.code != "00000") {
+  } else if (res.data.code != "00000" && res.data.code != "A0220") {
     Taro.hideLoading();
     Taro.showToast({
       title: "请求失败: " + res.message,
@@ -68,5 +73,22 @@ export default async <REQ, RES>(options: OptionsType<REQ>) => {
     // console.log("1");
     await loginAndTokenOrRedirect();
   }
-  return await realRequest<REQ, RES>(options)
+  let rres;
+  try {
+    rres = await realRequest<REQ, RES>(options);
+    console.log(rres);
+    if (rres.code == "A0220") {
+      await loginAndTokenOrRedirect();
+      rres = await realRequest<REQ, RES>(options);
+    }
+  } catch (e) {
+    // console.log(e);
+    // Taro.showToast({
+    //   title: "请求失败",
+    //   icon: "none"
+    // })
+    // Taro.hideLoading();
+  }
+
+  return rres;
 };
