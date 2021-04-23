@@ -150,7 +150,8 @@ export type PostRevReq = {
   date : string,
   startTime: string,
   endTime : string,
-  content : string
+  content : string,
+  remind : boolean
 }
 
 export type PostRevRes = BaseRes<{}>;
@@ -174,3 +175,15 @@ export const getMyRev = async (req: GetMyRevReq) =>
   }
 )
 
+export type RemindRevReq = {
+  token : string,
+  id : number,
+  remind : boolean
+}
+
+export const remindRev = async (req: RemindRevReq) =>
+  await Request<RemindRevReq, PostRevRes>({
+    url: "/remindReservation",
+    method: "POST",
+    data: req
+  });

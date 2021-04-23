@@ -8476,7 +8476,7 @@ tar@^6.0.2:
 
 taro-iconfont-cli@^3.2.1:
   version "3.2.1"
-  resolved "https://registry.npm.taobao.org/taro-iconfont-cli/download/taro-iconfont-cli-3.2.1.tgz#842235cb9d1dc1f6722e52acff111b158e5d3be7"
+  resolved "https://registry.nlark.com/taro-iconfont-cli/download/taro-iconfont-cli-3.2.1.tgz#842235cb9d1dc1f6722e52acff111b158e5d3be7"
   integrity sha1-hCI1y50dwfZyLlKs/xEbFY5dO+c=
   dependencies:
     colors "^1.4.0"

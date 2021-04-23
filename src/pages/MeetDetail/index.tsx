@@ -10,15 +10,15 @@ const MeetDetail: Taro.FunctionComponent = () => {
   const {params} = useRouter();
   const meetId = params.meetid;
   useDidShow(async () => {
-    Taro.showLoading();
+    await Taro.showLoading();
     // await loginAndTokenOrRedirect();
     const res = await getRev({
       id: parseInt(meetId!)
     })
-    Taro.hideLoading();
+    await Taro.hideLoading();
 
     if (res.code == "A0300") {
-      Taro.showToast({
+      await Taro.showToast({
         title: res.message,
         icon: "none",
         duration: 500

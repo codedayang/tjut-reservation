@@ -8,7 +8,7 @@ import MeetItem from "../../component/MeetItem";
 
 const MyMeet: Taro.FunctionComponent = () => {
   useDidShow(async () => {
-    Taro.showLoading();
+    await Taro.showLoading();
     // await loginAndTokenOrRedirect();
     const res = await getMyRev({
       month: (date.getMonth() + 1).toString(),
@@ -22,11 +22,11 @@ const MyMeet: Taro.FunctionComponent = () => {
 
   })
   const [month, setMonth] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-  const [date, setDate] = useState(new Date());
+  const [date] = useState(new Date());
   const [info, setInfo] = useState<MyMeetInfo[]>([]);
 
   const handleSwitchMonth = async (toYear: number, toMonth: number) => {
-    Taro.showLoading();
+    await Taro.showLoading();
     const res = await getMyRev({
       month: (toMonth+1).toString(),
       year: (toYear).toString()
@@ -44,8 +44,8 @@ const MyMeet: Taro.FunctionComponent = () => {
         <Button
           size={"mini"}
           style={{margin: "0"}}
-          onClick={() => {
-            Taro.navigateTo({
+          onClick={async () => {
+            await Taro.navigateTo({
               url: `../MeetForm/index`
             })
           }}><Text>预约会议室</Text></Button>

@@ -48,23 +48,23 @@ const MeetForm: Taro.FunctionComponent = () => {
 
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     if (name == "") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "会议名称不能为空",
         icon: "none"
       });
       return;
     }
     if (roomId == undefined) {
-      Taro.showToast({
+      await Taro.showToast({
         title: "请选择会议室",
         icon: "none"
       });
       return;
     }
     if (date == "请选择日期") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "请选择日期",
         icon: "none"
       });
@@ -72,7 +72,7 @@ const MeetForm: Taro.FunctionComponent = () => {
     }
 
     if (startTime == "开始时间") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "请选择开始时间",
         icon: "none"
       });
@@ -80,7 +80,7 @@ const MeetForm: Taro.FunctionComponent = () => {
     }
 
     if (endTime == "结束时间") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "请选择结束时间",
         icon: "none"
       });
@@ -91,7 +91,7 @@ const MeetForm: Taro.FunctionComponent = () => {
     const starts = startTime.split(":");
 
     if (parseInt(ends[0]) < parseInt(starts[0])) {
-      Taro.showToast({
+      await Taro.showToast({
         title: "结束时间不能小于开始时间",
         icon: "none"
       });
@@ -100,7 +100,7 @@ const MeetForm: Taro.FunctionComponent = () => {
 
     if (parseInt(ends[0]) == parseInt(starts[0])
       && parseInt(ends[1]) <= parseInt(starts[1])) {
-      Taro.showToast({
+      await Taro.showToast({
         title: "结束时间不能小于开始时间",
         icon: "none"
       });
@@ -108,7 +108,7 @@ const MeetForm: Taro.FunctionComponent = () => {
     }
 
     if (content == "") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "请填写会议内容",
         icon: "none"
       });
@@ -121,12 +121,21 @@ const MeetForm: Taro.FunctionComponent = () => {
       name: name,
       roomId: roomId,
       startTime: startTime,
+      remind : true
     };
-    Taro.showLoading();
+    await Taro.requestSubscribeMessage({
+      tmplIds : [ 'zoNiVDerNHmRIxEqslSyanW9RftA6jjS66E2w8EVYaM',
+                  'Sx99rGlCxNt580Zjpu1sNleOoloXV4M2L55YLScM-xI',
+                  '0JMcKVMwcxTR30FccNilNA5ETndnWXUheHG4t_lFcRY'],
+      fail : ()=>{
+        req.remind = false;
+      }
+    })
+    await Taro.showLoading();
     const res = await postRev(req)
     console.log(res);
     if (res.code == "00000") {
-      Taro.showToast({
+      await Taro.showToast({
         title: "创建成功",
         duration: 1000
       })
@@ -135,7 +144,7 @@ const MeetForm: Taro.FunctionComponent = () => {
         Taro.navigateBack();
       }, 1000)
     } else {
-      Taro.showToast({
+      await Taro.showToast({
         title: "创建失败" + res.message,
         icon: "none",
         duration: 1000
