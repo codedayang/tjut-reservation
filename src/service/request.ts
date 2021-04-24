@@ -76,7 +76,7 @@ export default async <REQ, RES>(options: OptionsType<REQ>) => {
   let rres;
   try {
     rres = await realRequest<REQ, RES>(options);
-    console.log(rres);
+    // console.log(rres);
     if (rres.code == "A0220") {
       await loginAndTokenOrRedirect();
       rres = await realRequest<REQ, RES>(options);

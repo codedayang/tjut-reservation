@@ -1,6 +1,6 @@
 import {View} from '@tarojs/components'
 import './index.less'
-import Taro, {useDidShow} from '@tarojs/taro'
+import Taro, {useDidShow, useReady} from '@tarojs/taro'
 import Calendar from "../../component/Calendar";
 import {useState} from "react";
 import RoomItem from "../../component/RoomItem";
@@ -14,7 +14,7 @@ const MeetList: Taro.FunctionComponent = () => {
   useDidShow(async () => {
     Taro.showLoading();
     // await loginAndTokenOrRedirect();
-    await load(new Date());
+    await load(date);
   })
 
   const load = async (ldate: Date) => {
@@ -22,12 +22,14 @@ const MeetList: Taro.FunctionComponent = () => {
     const res = await getRevs({
       year: ldate.getFullYear().toString(),
       month: (ldate.getMonth() + 1).toString()
-    })
+    });
     setMonthData(res.data.day);
     setRoomData(res.data.meetingRoom);
-    setDate(new Date());
+    // setDate(new Date());
     // console.log(res.data.day)
     Taro.hideLoading();
+
+
 
   }
   const handleCalendarChange = async (cdate: Date, inMonth: boolean) => {
@@ -60,13 +62,14 @@ const MeetList: Taro.FunctionComponent = () => {
               <View className="room-list-item" onClick={() => {
                 Taro.navigateTo({
                   url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${date.getDate()}`
-                })
+                });
+
               }}>
                 <RoomItem
                   {...item}
                   bar={data.bar} index={index}/>
               </View>
-            )
+            );
           } else {
             return (<View className="room-list-item" onClick={() => {
               Taro.navigateTo({
@@ -79,21 +82,6 @@ const MeetList: Taro.FunctionComponent = () => {
             </View>)
           }
         })}
-        {/*{today?.meetingRoomInfo.map((item, index) => {*/}
-        {/*  return (*/}
-        {/*    <View className="room-list-item" onClick={() => {*/}
-        {/*      Taro.navigateTo({*/}
-        {/*        url: `../RoomDetail/index?roomid=${item.roomid}&year=${date.getFullYear()}&month=${date.getMonth()}&day=${today.dayOfMonth}`*/}
-        {/*      })*/}
-        {/*    }}>*/}
-        {/*      <RoomItem*/}
-        {/*        {...roomData.find(it => it.roomid == item.roomid)!!}*/}
-        {/*        bar={item.bar} index={index}/>*/}
-        {/*    </View>*/}
-
-
-        {/*  )*/}
-        {/*})}*/}
       </View>
 
 
