@@ -1,4 +1,4 @@
-import Taro, {useRouter, useDidShow} from "@tarojs/taro";
+import Taro, {useRouter, useDidShow, useShareAppMessage} from "@tarojs/taro";
 import {Image, View} from "@tarojs/components";
 import {getRev, GetRevRes} from "../../service/api";
 import {useState} from "react";
@@ -6,6 +6,16 @@ import MeetInfo from "../../component/MeetInfo";
 import "./index.less"
 
 const MeetDetail: Taro.FunctionComponent = () => {
+
+  useShareAppMessage(res => {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: data?.data.name,
+      path: `/pages/MeetDetail/index?meetid=${data?.data.id}`
+    }
+  })
 
   const {params} = useRouter();
   const meetId = params.meetid;

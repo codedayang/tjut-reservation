@@ -27,7 +27,7 @@ const InputModal: Taro.FunctionComponent<Props> =
           <View className="title">{title}</View>
           <Input
             type='text'
-            placeholder='必填'
+            placeholder='原因'
             className="input"
             value={inputText}
             onInput={(e) => {
