@@ -54,6 +54,7 @@ export type MyMeetInfo = {
   meetingName : string,
   date : string,
   time : string,
+  content: string;
   remind: boolean,
   status: "未开始" | "进行中" | "已结束"
 }

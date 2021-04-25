@@ -17,6 +17,7 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
      date,
      time,
      status,
+      content,
      remind: initRemind
    }) =>
 {
@@ -131,6 +132,19 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
           <View
             className="meet-info-right-item"
             onClick={() => {
+              let query = "";
+              query += `meetid=${id}&`;
+              // query += `roomid=${}`
+              query += `roomname=${meetingName}&`;
+              query += `pdate=${date}&`;
+              // query += `meetstarttime=${time.split("-")[0]}&`;
+              // query += `meetendtime=${time.split("-")[1]}&`;
+              // query += `meetcontent=${content}`;
+
+
+              Taro.navigateTo({
+                url: `../MeetForm/index?${query}`
+              })
               console.log("ok")
             }}>
             <IconFont name={"edit"} size={42}/>
