@@ -3,6 +3,7 @@ import {Button, Form, Input, Picker, Text, View} from "@tarojs/components";
 import './index.less'
 import {getRevs, MeetingRoom, postRev} from "../../service/api";
 import {useState} from "react";
+import {REMIND_TMPLS} from "../../config";
 
 const MeetForm: Taro.FunctionComponent = () => {
   const [roomList, setRoomList] = useState<MeetingRoom[]>([]);
@@ -124,9 +125,7 @@ const MeetForm: Taro.FunctionComponent = () => {
       remind : true
     };
     await Taro.requestSubscribeMessage({
-      tmplIds : [ 'zoNiVDerNHmRIxEqslSyanW9RftA6jjS66E2w8EVYaM',
-                  'Sx99rGlCxNt580Zjpu1sNleOoloXV4M2L55YLScM-xI',
-                  '0JMcKVMwcxTR30FccNilNA5ETndnWXUheHG4t_lFcRY'],
+      tmplIds : REMIND_TMPLS,
       fail : ()=>{
         req.remind = false;
       }

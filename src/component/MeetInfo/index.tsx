@@ -1,19 +1,12 @@
 import Taro from "@tarojs/taro";
-import {Text, View} from "@tarojs/components";
+import {Button, Text, View} from "@tarojs/components";
 import './index.less'
-import IconFont, {IconNames} from "../iconfont";
-import {MyMeetInfo} from "../../service/api";
+import IconFont from "../iconfont";
+import {deleteRev, MyMeetInfo, remindRev} from "../../service/api";
+import {REMIND_TMPLS} from "../../config";
+import {useState} from "react";
+import InputModal from "../InputModal";
 
-const rightItem = (icon: IconNames, tip: string) => {
-  return (
-    <View
-      className="meet-info-right-item"
-      onClick={() => console.log("ok")}>
-      <IconFont name={icon} size={42}/>
-      <View className="right-item-text">{tip}</View>
-    </View>
-  )
-}
 type Prop = MyMeetInfo;
 const MeetInfo: Taro.FunctionComponent<Prop> =
   ({
@@ -23,9 +16,12 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
      meetingName,
      date,
      time,
-     status
+     status,
+     remind: initRemind
    }) =>
 {
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
+  const [remind, setRemind] = useState(initRemind)
   let statusClassname = "";
   switch (status) {
     case "未开始":
@@ -75,16 +71,94 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
       <View className="row-line"/>
       <View className="right">
         <View className="row-1">
-          {rightItem("ring", "开启提醒")}
-          {rightItem("link", "分享会议")}
+          <View
+            className="meet-info-right-item"
+            onClick={async () => {
+              console.log(remind);
+              if (remind) {
+                await remindRev({
+                  id: id,
+                  remind: false
+                });
+                await Taro.showToast({
+                  title: "已取消提醒"
+                });
+                setRemind(false);
+              } else {
+                await Taro.requestSubscribeMessage({
+                  tmplIds: REMIND_TMPLS,
+                  fail: () => {
+                    Taro.showToast({
+                      title: "已取消授权"
+                    });
+                  },
+                  success: () => {
+                    Taro.showToast({
+                      title: "开启提醒成功"
+                    });
+                  }
+                });
+                setRemind(true);
+              }
+
+              // console.log("ok")
+            }}>
+            <IconFont name={"ring"} size={42}/>
+            <View className="right-item-text">
+              {!remind ? "开启提醒" : "关闭提醒"}
+            </View>
+          </View>
+          <View
+            className="meet-info-right-item"
+            onClick={() => {
+
+              console.log("ok");
+            }}>
+            <IconFont name={"link"} size={42}/>
+            <View className="right-item-text">分享会议</View>
+          </View>
         </View>
         <View className="row-2">
-          {rightItem("delete", "删除会议")}
-          {rightItem("edit", "修改会议")}
+          <View
+            className="meet-info-right-item"
+            onClick={async () => {
+              setDeleteModalShow(true);
+              // console.log("ok")
+            }}>
+            <IconFont name={"delete"} size={42}/>
+            <View className="right-item-text">删除会议</View>
+          </View>
+          <View
+            className="meet-info-right-item"
+            onClick={() => {
+              console.log("ok")
+            }}>
+            <IconFont name={"edit"} size={42}/>
+            <View className="right-item-text">修改会议</View>
+          </View>
         </View>
       </View>
+      <InputModal
+        title="删除原因"
+        isRequired={true}
+        isOpen={deleteModalShow}
+        onMaskClick={() => {
+          setDeleteModalShow(false);
+        }}
+        onCancelClick={() => {
+          setDeleteModalShow(false);
+        }}
+        onConfirmClick={async (input) => {
+          await Taro.showLoading();
+          await deleteRev({
+            id: id,
+            remark: input
+          });
+          Taro.hideLoading();
+        }}>
+      </InputModal>
     </View>
-  )
+  );
 
 }
 
