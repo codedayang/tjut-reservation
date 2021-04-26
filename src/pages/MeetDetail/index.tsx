@@ -13,7 +13,8 @@ const MeetDetail: Taro.FunctionComponent = () => {
     }
     return {
       title: data?.data.name,
-      path: `/pages/MeetDetail/index?meetid=${data?.data.id}`
+      path: `/pages/MeetDetail/index?meetid=${data?.data.id}`,
+      imageUrl: "../../images/logo.png"
     }
   })
 
