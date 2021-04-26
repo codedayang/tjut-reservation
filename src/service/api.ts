@@ -128,6 +128,7 @@ export type MeetParticipant = {
 
 export type GetRevRes = BaseRes<{
   isCreator : boolean,
+  isParticipant: boolean;
   id : number,
   name : string,
   creator :string,
@@ -221,3 +222,16 @@ export const modifyRev = async (req: ModifyRevReq) =>
     data: req
   });
 
+export type JoinRevReq = {
+  id: number;
+  join: boolean;
+};
+
+export type JoinRevRes = BaseRes<{}>;
+
+export const joinRev = async (req: JoinRevReq) =>
+  await Request<JoinRevReq, JoinRevRes>({
+    url: "/joinReservation",
+    method: "POST",
+    data: req
+  })
