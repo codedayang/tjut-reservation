@@ -138,7 +138,7 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
 
 
           </View>
-          <View className={`row-2 ${isCreator ? "" : "single"}`}>
+          <View className={`row-2`}>
             {isCreator ?
               <View
                 className="meet-info-right-item"
@@ -170,13 +170,16 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
                 Taro.navigateTo({
                   url: `../MeetForm/index?${query}`
                 })
-                console.log("ok")
               }}>
-              {isCreator &&
+              {isCreator ?
               <View>
                 <IconFont name={"edit"} size={42}/>
                 <View className="right-item-text">修改会议</View>
               </View>
+                :
+              <View style={{width: "70px"}}>
+              </View>
+
               }
 
             </View>
