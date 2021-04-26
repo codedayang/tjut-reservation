@@ -91,5 +91,6 @@ export default async <REQ, RES>(options: OptionsType<REQ>) => {
     // Taro.hideLoading();
   }
 
+  // @ts-ignore
   return rres;
 };

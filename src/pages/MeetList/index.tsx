@@ -1,6 +1,6 @@
 import {View} from '@tarojs/components'
 import './index.less'
-import Taro, {useDidShow, useReady} from '@tarojs/taro'
+import Taro, {useDidShow} from '@tarojs/taro'
 import Calendar from "../../component/Calendar";
 import {useState} from "react";
 import RoomItem from "../../component/RoomItem";
@@ -12,13 +12,12 @@ const MeetList: Taro.FunctionComponent = () => {
   const [roomData, setRoomData] = useState<MeetingRoom[]>([])
 
   useDidShow(async () => {
-    Taro.showLoading();
     // await loginAndTokenOrRedirect();
     await load(date);
   })
 
   const load = async (ldate: Date) => {
-    Taro.showLoading();
+    await Taro.showLoading();
     const res = await getRevs({
       year: ldate.getFullYear().toString(),
       month: (ldate.getMonth() + 1).toString()

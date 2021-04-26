@@ -2,7 +2,7 @@ import Taro from "@tarojs/taro";
 import {Button, Text, View} from "@tarojs/components";
 import './index.less'
 import IconFont from "../iconfont";
-import {deleteRev, MyMeetInfo, remindRev} from "../../service/api";
+import {deleteRev, joinRev, MyMeetInfo, remindRev} from "../../service/api";
 import {REMIND_TMPLS} from "../../config";
 import {useState} from "react";
 import InputModal from "../InputModal";
@@ -17,7 +17,9 @@ type Prop = {
   content: string;
   remind: boolean,
   isCreator: boolean;
-  status: "未开始" | "进行中" | "已结束"
+  isParticipant: boolean;
+  status: "未开始" | "进行中" | "已结束",
+  reload: () => void;
 };
 const MeetInfo: Taro.FunctionComponent<Prop> =
   ({
@@ -30,10 +32,14 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
      status,
      content,
      isCreator,
-     remind: initRemind
+     isParticipant,
+     remind,
+     reload
    }) => {
     const [deleteModalShow, setDeleteModalShow] = useState(false);
-    const [remind, setRemind] = useState(initRemind)
+    // const [remind, setRemind] = useState(initRemind)
+    // const [isJoined, setIsJoined] = useState(isParticipant);
+
     let statusClassname = "";
     switch (status) {
       case "未开始":
@@ -45,7 +51,7 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
       case "已结束":
         statusClassname += "ended";
     }
-    console.log(isCreator);
+    // console.log(isCreator);
     return (
       <View className="meet-info-container" key={id}>
         <View className="left">
@@ -87,27 +93,27 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
             <View
               className="meet-info-right-item"
               onClick={async () => {
-                console.log(remind);
+                // console.log(remind);
                 if (remind) {
                   await Taro.showLoading();
                   const res = await remindRev({
                     id: id,
                     remind: false
                   });
+                  Taro.hideLoading();
                   if (res.code == "00000") {
                     await Taro.showToast({
                       title: "已取消提醒",
                       icon: "none"
                     });
-                    setRemind(false);
                   } else {
                     await Taro.showToast({
                       title: "取消提醒失败",
                       icon: "none"
                     });
-                    setRemind(true);
+                    // setRemind(true);
                   }
-                  Taro.hideLoading();
+                  reload();
                 } else {
                   await Taro.requestSubscribeMessage({
                     tmplIds: REMIND_TMPLS,
@@ -117,13 +123,17 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
                         icon: "none"
                       });
                     },
-                    success: () => {
-                      Taro.showToast({
+                    success: async () => {
+                      await remindRev({
+                        id: id,
+                        remind: true
+                      });
+                      await Taro.showToast({
                         title: "开启提醒成功"
                       });
                     }
                   });
-                  setRemind(true);
+                  reload();
                 }
 
                 // console.log("ok")
@@ -138,7 +148,7 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
               openType="share"
               onClick={() => {
 
-                console.log("ok");
+                // console.log("ok");
               }}>
               <View className="withe-line-top"/>
               <View className="withe-line-left"/>
@@ -162,15 +172,74 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
                 <View className="right-item-text">删除会议</View>
               </View>
               :
-              <View
-                className="meet-info-right-item"
-                onClick={async () => {
-                  setDeleteModalShow(true);
-                }}
-              >
-                <IconFont name={"delete"} size={42}/>
-                <View className="right-item-text">退出会议</View>
-              </View>
+              isParticipant ?
+                <View
+                  className="meet-info-right-item"
+                  onClick={async () => {
+                    Taro.showModal({
+                      title: '退出会议？',
+                      cancelText: "取消",
+                      confirmText: "退出",
+                      confirmColor: "#e75e58",
+                      success: async (res) => {
+                        if (res.confirm) {
+                          await Taro.showLoading();
+                          await joinRev({
+                            id: id,
+                            join: false
+                          });
+                          Taro.hideLoading();
+                          reload();
+                          // setIsJoined(res.code == "00000");
+                        } else if (res.cancel) {
+                        }
+                      }
+                    })
+                  }}
+                >
+                  <IconFont name={"delete"} size={42}/>
+                  <View className="right-item-text">退出会议</View>
+                </View>
+                :
+                <View
+                  className="meet-info-right-item"
+                  onClick={async () => {
+
+                    Taro.showLoading();
+                    const res = await joinRev({
+                      id: id,
+                      join: true
+                    })
+
+                    await Taro.requestSubscribeMessage({
+                      tmplIds: REMIND_TMPLS,
+                      fail: () => {
+                        Taro.showToast({
+                          title: "已取消授权",
+                          icon: "none"
+                        });
+                      },
+                      success: () => {
+                        Taro.showToast({
+                          title: "开启提醒成功"
+                        });
+                      }
+                    });
+                    if (res.code == "00000") {
+                      await Taro.showToast({
+                        title: "加入会议成功"
+                      })
+                      // setIsJoined(true);
+                    } else {
+                      await Taro.showToast({
+                        title: "加入会议失败"
+                      })
+                    }
+                    reload();
+                  }}>
+                  <IconFont name={"Join"} size={42}/>
+                  <View className="right-item-text">加入会议</View>
+                </View>
             }
             <View
               className={`meet-info-right-item ${isCreator ? "" : "hide"}`}
@@ -184,13 +253,13 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
                 })
               }}>
               {isCreator ?
-              <View className="meet-info-right-item">
-                <IconFont name={"edit"} size={42}/>
-                <View className="right-item-text">修改会议</View>
-              </View>
+                <View className="meet-info-right-item">
+                  <IconFont name={"edit"} size={42}/>
+                  <View className="right-item-text">修改会议</View>
+                </View>
                 :
-              <View className="meet-info-right-item">
-              </View>
+                <View className="meet-info-right-item">
+                </View>
 
               }
 
@@ -214,6 +283,12 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
               remark: input
             });
             Taro.hideLoading();
+            setTimeout(() => {
+              Taro.navigateBack();
+            }, 1000)
+            await Taro.showToast({
+              title: "会议已取消"
+            })
           }}>
         </InputModal>
       </View>
