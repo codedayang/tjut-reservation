@@ -89,20 +89,32 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
               onClick={async () => {
                 console.log(remind);
                 if (remind) {
-                  await remindRev({
+                  await Taro.showLoading();
+                  const res = await remindRev({
                     id: id,
                     remind: false
                   });
-                  await Taro.showToast({
-                    title: "已取消提醒"
-                  });
-                  setRemind(false);
+                  if (res.code == "00000") {
+                    await Taro.showToast({
+                      title: "已取消提醒",
+                      icon: "none"
+                    });
+                    setRemind(false);
+                  } else {
+                    await Taro.showToast({
+                      title: "取消提醒失败",
+                      icon: "none"
+                    });
+                    setRemind(true);
+                  }
+                  Taro.hideLoading();
                 } else {
                   await Taro.requestSubscribeMessage({
                     tmplIds: REMIND_TMPLS,
                     fail: () => {
                       Taro.showToast({
-                        title: "已取消授权"
+                        title: "已取消授权",
+                        icon: "none"
                       });
                     },
                     success: () => {
@@ -172,12 +184,12 @@ const MeetInfo: Taro.FunctionComponent<Prop> =
                 })
               }}>
               {isCreator ?
-              <View>
+              <View className="meet-info-right-item">
                 <IconFont name={"edit"} size={42}/>
                 <View className="right-item-text">修改会议</View>
               </View>
                 :
-              <View style={{width: "70px"}}>
+              <View className="meet-info-right-item">
               </View>
 
               }
